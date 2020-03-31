@@ -1,18 +1,19 @@
 import React, { Fragment } from 'react';
-// import history from '../history';
-import { useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-
+import { useLocation, RouteChildrenProps } from "react-router-dom";
 
 interface SurveyProps {
     serviceName: string;
 };
 
-export default function Survey() {
-
-    const location = useLocation();
+export default function Survey(props: RouteChildrenProps) {
+    const location: { state: { name: string }}= useLocation();
     const serviceName = location.state.name;
 
+    const onSubmit = () => {
+      const { history } = props;
+      history.push("/result");
+    }
+  
     return (
         <Fragment>
             <div>Survey Page</div>
@@ -69,6 +70,9 @@ export default function Survey() {
                     15. 열다섯 번째 질문: <input />
                 </li>
             </ol>
+            <button onClick={onSubmit}>
+              결과보기
+            </button>
         </Fragment>
     );
 }
