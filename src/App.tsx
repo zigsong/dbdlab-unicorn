@@ -16,15 +16,33 @@ const { Header, Content, Footer } = Layout;
 
 const UnicornHeader = styled.p`
   color: white;
+  font-size: 22px;
 `
 
 function App() {
+  const onClickHeader = () => {
+    history.push('/');
+  }
+
   return (
     <Layout style={{ height: '100%' }}>
       <BrowserRouter>
-        <Header>
+        <Header style={{ padding: '0 20px'}}>
           <div className="logo">
-            <UnicornHeader>유니콘 테스트 v0.1</UnicornHeader>
+            <UnicornHeader>
+              <button onClick={onClickHeader}>
+                <span>🦄 </span>
+                <span style={{ color: "#FF6666"}}>W</span>
+                <span style={{ color: "#FF7F33"}}>h</span>
+                <span style={{ color: "#FFFF66"}}>o</span>
+                <span style={{ color: "#66FF66"}}>n</span>
+                <span style={{ color: "#6666FF"}}>i</span>
+                <span style={{ color: "#6666FF"}}>c</span>
+                <span style={{ color: "#4B6682"}}>o</span>
+                <span style={{ color: "#B466F3"}}>r</span>
+                <span style={{ color: "#FF66FF"}}>n</span>
+              </button>
+            </UnicornHeader>
           </div>
         </Header>
         <Content>
@@ -35,7 +53,7 @@ function App() {
             <Route path="/result" component={UnicornResult}/>
           </Router>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Whonicorn ©2020 Created by Realdopt</Footer>
+        <Footer style={{ textAlign: 'center' }}>Whonicorn ©2020 Created by <a href="https://realdopt.com/">Realdopt</a> </Footer>
       </BrowserRouter>
     </Layout>
   );
