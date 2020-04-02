@@ -30,7 +30,7 @@ function App() {
         <Header style={{ padding: '0 20px'}}>
           <div className="logo">
             <UnicornHeader>
-              <button onClick={onClickHeader}>
+              <button onClick={onClickHeader} style={{ background: "none",  border: "none" }}>
                 <span>🦄 </span>
                 <span style={{ color: "#FF6666"}}>W</span>
                 <span style={{ color: "#FF7F33"}}>h</span>
