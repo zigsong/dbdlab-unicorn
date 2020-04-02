@@ -6,8 +6,8 @@ interface SurveyProps {
 };
 
 export default function Survey(props: RouteChildrenProps) {
-    const location: { state: { name: string }}= useLocation();
-    const serviceName = location.state.name;
+    const location = useLocation();
+    const serviceName = new URLSearchParams(location.search).get("serviceName")
 
     const onSubmit = () => {
       const { history } = props;
