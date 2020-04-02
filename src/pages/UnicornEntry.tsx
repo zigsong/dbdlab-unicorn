@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { withRouter, RouteChildrenProps } from 'react-router-dom';
 import UnicornFlexLayout from "../layouts/UnicornFlexLayout";
-import { UnicornText, UnicornButton, UnicornEmptyRow, UnicornTextField } from "../components";
 import EntryBannerImage from "../assets/entry_banner.png"
+import { UnicornText, UnicornButton, UnicornEmptyRow, UnicornTextField } from "../components";
 
 const BannerImg = styled.img`
   max-width: 100%;
