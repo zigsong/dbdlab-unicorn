@@ -12,14 +12,13 @@ const UnicornDiv = styled(Layout)`
 const UnicornContent = styled(Content)`
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
   text-align: center;
 `
 
-function UnicornFlexLayout({ children }: { children: React.ReactNode }) {
+function UnicornFlexLayout({ padding, children }: { padding?: string, children: React.ReactNode }) {
   return (
     <UnicornDiv className="layout">
-      <UnicornContent>
+      <UnicornContent style={{  padding: padding ? padding : '0 10px' }}>
         {children}
       </UnicornContent>
     </UnicornDiv>
