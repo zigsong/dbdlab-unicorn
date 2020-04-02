@@ -6,7 +6,6 @@ import UnicornFlexLayout from "../layouts/UnicornFlexLayout";
 import { UnicornText, UnicornButton, UnicornEmptyRow, UnicornTextField } from "../components";
 import EntryBannerImage from "../assets/entry_banner.png"
 
-
 const BannerImg = styled.img`
   max-width: 100%;
   max-height: 200px;
@@ -22,7 +21,7 @@ function UnicornHome(props: RouteChildrenProps) {
     const { history } = props;
     history.push({
       pathname: '/survey',
-      search: "?" + new URLSearchParams({ serviceName }).toString()
+      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
   }
 
