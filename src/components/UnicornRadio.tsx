@@ -1,5 +1,4 @@
-import React from "react";
-import { Radio } from 'antd';
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
@@ -11,14 +10,21 @@ const StyledDiv = styled.div`
   flex-direction: column;
 `
 
-const StyledRadioGroup = styled(Radio.Group)`
-height: 100px !important;
-    .ant-radio-wrapper {
-        .ant-radio {
-            widht: 100px;
-            height: 100px;
-        }
-    }       
+// const StyledRadioGroup = styled(Radio.Group)`
+// height: 100px !important;
+//     .ant-radio-wrapper {
+//         .ant-radio {
+//             widht: 100px;
+//             height: 100px;
+//         }
+//     }       
+// `
+
+const Caption = styled.div`
+    font-size: 10px;
+    text-align: center;
+    position: absolute;
+    margin-top: 5px
 `
 
 const RadioGroup = styled.div`
@@ -48,40 +54,75 @@ const RadioGroup = styled.div`
             
         };
         &.agree {   
-            // background: #aacfcf;
             border: 2px solid #aacfcf;
+            &:hover {
+                background: #aacfcf;
+            }
+            &.selected {
+                background: #aacfcf;
+            }
         };
         &.disagree {
-            // background: #ffb6b6;
             border: 2px solid #ffb6b6;
+            &:hover {
+                background: #ffb6b6;
+            }
+            &.selected {
+                background: #ffb6b6;
+            }
         };
         &.neutral {
-            // background: #C4C4C4;
             border: 2px solid #C4C4C4;
+            &:hover {
+                background: #C4C4C4;
+            }
+            &.selected {
+                background: #C4C4C4;
+            }
         }
     }
-    
 `
 interface StyledRadioProps {
   children: React.ReactNode
 }
 
 function UnicornRadio(props: StyledRadioProps) {
-  return (
-    <StyledDiv style={{  }}>
-    <p>{props.children}</p>
-        <RadioGroup>
-            <div className="option agree max"></div>
-            <div className="option agree med"></div>
-            <div className="option agree min"></div>
-            <div className="option neutral"></div>
-            <div className="option disagree min"></div>
-            <div className="option disagree med"></div>
-            <div className="option disagree max"></div>
-        </RadioGroup>
+    const [checked, setChecked] = useState("");
+    
+    return (
+        <StyledDiv style={{ marginBottom: '30px' }}>
+        <p>{props.children}</p>
+            <RadioGroup>
+                <div>
+                    <input style={{ display: 'none' }} type="radio" value="A" />
+                    <div className={"option agree max " + (checked === "A" ? 'selected' : "")} onClick={() => setChecked("A")}></div>
+                    <Caption>매우 그렇다</Caption>
+                </div>
+                <div className={"option agree med " + (checked === "B" ? 'selected' : "")} onClick={() => setChecked("B")}>
+                    <input style={{ display: 'none' }} type="radio" value="B"></input>
+                </div>
+                <div className={"option agree min " + (checked === "C" ? 'selected' : "")} onClick={() => setChecked("C")}>
+                    <input style={{ display: 'none' }} type="radio" value="C"></input>  
+                </div>
+                <div className={"option neutral " + (checked === "D" ? 'selected' : "")} onClick={() => setChecked("D")}>
+                    <input style={{ display: 'none' }} type="radio" value="D"></input>
+                </div>
+                <div className={"option disagree min " + (checked === "E" ? 'selected' : "")} onClick={() => setChecked("E")}>
+                    <input style={{ display: 'none' }} type="radio" value="E"></input>
+                </div>
+                <div className={"option disagree med " + (checked === "F" ? 'selected' : "")} onClick={() => setChecked("F")}>
+                    <input style={{ display: 'none' }} type="radio" value="F"></input>
+                </div>
+                <div>
+                    <div className={"option disagree max " + (checked === "G" ? 'selected' : "")} onClick={() => setChecked("G")}>
+                        <input style={{ display: 'none' }} type="radio" value="G    "></input>
+                    </div>
+                    <Caption>전혀 그렇지 않다</Caption>
+                </div>
+            </RadioGroup>
 
-    </StyledDiv>
-  )
+        </StyledDiv>
+    )
 }
 
 export default UnicornRadio;
