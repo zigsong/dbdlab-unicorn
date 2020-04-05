@@ -25,7 +25,7 @@ function App() {
   }
 
   return (
-    <Layout style={{ height: '100%' }}>
+    <Layout style={{ minHeight: '100%' }}>
       <BrowserRouter>
         <Header style={{ padding: '0 20px'}}>
           <div className="logo">
