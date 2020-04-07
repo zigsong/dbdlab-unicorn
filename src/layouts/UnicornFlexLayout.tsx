@@ -5,7 +5,8 @@ import styled from "styled-components";
 const { Content } = Layout;
 
 const UnicornDiv = styled(Layout)`
-  height: 100%;
+  // height: 100%;
+  height: -webkit-fill-available;
   background: white;
 `
 

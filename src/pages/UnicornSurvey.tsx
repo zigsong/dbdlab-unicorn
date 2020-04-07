@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import UnicornLayout from "../layouts/UnicornLayout";
-import { UnicornText, UnicornEmptyRow,  UnicornRadio} from "../components";
+import { UnicornText, UnicornEmptyRow,  UnicornRadio, UnicornButton } from "../components";
 import styled from "styled-components";
 import { Progress } from 'antd';
 
@@ -36,9 +36,31 @@ function Survey(props: RouteChildrenProps) {
     setAnswered(newAnswered);
   }
 
+  const goResult = () => {
+    const { history } = props;
+    history.push({
+      pathname: '/result',
+      // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+    })
+  }
+
   useEffect(() => {
     setProgressRate(Math.round(100 * answered.filter(a => a).length / answered.length ))
   }, [answered])
+
+  const NextButton = styled.button`
+    background-color: #aacfcf;
+    align-self: center;
+    width: 320px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+  `
 
   return (
     <UnicornLayout>
@@ -50,7 +72,9 @@ function Survey(props: RouteChildrenProps) {
           <UnicornRadio onChecked={() => onAnswer(i)} key={`radio_${i}`}>{ question }</UnicornRadio>
         ))}
       </div>
+      <NextButton onClick={goResult}>검사 결과 보기</NextButton>
       <UnicornEmptyRow flex={4} />
+      
     </UnicornLayout>
   )
 }
