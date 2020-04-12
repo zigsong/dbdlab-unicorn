@@ -1,3 +1,16 @@
 #root {
   height: 100%;
 }
+
+@font-face {
+  font-family: 'NanumSquare Regular';
+  src: url(./fonts/NanumSquareOTFRegular.otf)
+  format('opentype');
+}
+
+@font-face {
+  font-family: 'NanumSquare Bold';
+  src: url(./fonts/NanumSquareOTFBold.otf)
+  format('opentype');
+}
+

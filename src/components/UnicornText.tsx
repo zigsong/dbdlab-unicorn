@@ -16,8 +16,11 @@ const StyledText = styled.p`
 `
 
 interface UnicornTextProps {
+  width?: number
+  height?: number
   flex?: number
   fontSize?: number
+  color?: string
   children?: React.ReactNode;
 }
 
@@ -25,7 +28,10 @@ function UnicornText(props: UnicornTextProps) {
   return (
     <StyledDiv style={{ flex: props.flex }}>
       <StyledText style={{
+        width: `${props.width || 200}px`,
+        height: `${props.height || 50}px`,
         fontSize: `${props.fontSize || 18}px`,
+        color: `${props.color || 15}px`,
         lineHeight: `${(props.fontSize || 18) + 6}px`,
       }}>
         {props.children}

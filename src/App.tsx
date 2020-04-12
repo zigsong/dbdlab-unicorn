@@ -25,14 +25,14 @@ function App() {
   }
 
   return (
-    <Layout style={{ minHeight: '100%' }}>
+    // <Layout style={{ minHeight: '100%' }}>
       <BrowserRouter>
-        <Header style={{ padding: '0 20px'}}>
+        {/* <Header style={{ padding: '0 20px'}}> */}
           <div className="logo">
-            <UnicornHeader>
+            {/* <UnicornHeader> */}
               <button onClick={onClickHeader} style={{ background: "none",  border: "none" }}>
-                <span>🦄 </span>
-                <span style={{ color: "#FF6666"}}>W</span>
+                {/* <span>🦄 </span> */}
+                {/* <span style={{ color: "#FF6666"}}>W</span>
                 <span style={{ color: "#FF7F33"}}>h</span>
                 <span style={{ color: "#FFFF66"}}>o</span>
                 <span style={{ color: "#66FF66"}}>n</span>
@@ -40,11 +40,11 @@ function App() {
                 <span style={{ color: "#6666FF"}}>c</span>
                 <span style={{ color: "#4B6682"}}>o</span>
                 <span style={{ color: "#B466F3"}}>r</span>
-                <span style={{ color: "#FF66FF"}}>n</span>
+                <span style={{ color: "#FF66FF"}}>n</span> */}
               </button>
-            </UnicornHeader>
+            {/* </UnicornHeader> */}
           </div>
-        </Header>
+        {/* </Header> */}
         <Content>
           <Router history={history}>
             <Route exact path="/" component={UnicornHome}/>
@@ -53,9 +53,9 @@ function App() {
             <Route path="/result" component={UnicornResult}/>
           </Router>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Whonicorn ©2020 Created by <a href="https://realdopt.com/">Realdopt</a> </Footer>
+        {/* <Footer style={{ textAlign: 'center' }}>Whonicorn ©2020 Created by <a href="https://realdopt.com/">Realdopt</a> </Footer> */}
       </BrowserRouter>
-    </Layout>
+    // </Layout>
   );
 }
 

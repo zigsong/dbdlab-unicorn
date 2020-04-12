@@ -46,7 +46,11 @@ function Survey(props: RouteChildrenProps) {
 
   useEffect(() => {
     setProgressRate(Math.round(100 * answered.filter(a => a).length / answered.length ))
-  }, [answered])
+  }, [answered]);
+
+  useEffect(() => {
+    console.log(serviceName);
+  });
 
   const NextButton = styled.button`
     background-color: #aacfcf;
@@ -74,7 +78,6 @@ function Survey(props: RouteChildrenProps) {
       </div>
       <NextButton onClick={goResult}>검사 결과 보기</NextButton>
       <UnicornEmptyRow flex={4} />
-      
     </UnicornLayout>
   )
 }
