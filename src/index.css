@@ -14,3 +14,10 @@
   format('opentype');
 }
 
+@font-face {
+  font-family: 'fromdamiM';
+  src: url(./fonts/fromdamiM.ttf)
+  format('truetype');
+}
+
+

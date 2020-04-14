@@ -40,7 +40,7 @@ function Survey(props: RouteChildrenProps) {
     const { history } = props;
     history.push({
       pathname: '/result',
-      // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
   }
 

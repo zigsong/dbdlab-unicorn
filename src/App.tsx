@@ -28,9 +28,9 @@ function App() {
     // <Layout style={{ minHeight: '100%' }}>
       <BrowserRouter>
         {/* <Header style={{ padding: '0 20px'}}> */}
-          <div className="logo">
+          {/* <div className="logo"> */}
             {/* <UnicornHeader> */}
-              <button onClick={onClickHeader} style={{ background: "none",  border: "none" }}>
+              {/* <button onClick={onClickHeader} style={{ background: "none",  border: "none" }}> */}
                 {/* <span>🦄 </span> */}
                 {/* <span style={{ color: "#FF6666"}}>W</span>
                 <span style={{ color: "#FF7F33"}}>h</span>
@@ -41,9 +41,9 @@ function App() {
                 <span style={{ color: "#4B6682"}}>o</span>
                 <span style={{ color: "#B466F3"}}>r</span>
                 <span style={{ color: "#FF66FF"}}>n</span> */}
-              </button>
+              {/* </button> */}
             {/* </UnicornHeader> */}
-          </div>
+          {/* </div> */}
         {/* </Header> */}
         <Content>
           <Router history={history}>
