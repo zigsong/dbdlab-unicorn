@@ -71,7 +71,7 @@ function Survey(props: RouteChildrenProps) {
       <UnicornEmptyRow flex={4} />
       <UnicornEmptyRow flex={1} />
       <Progress strokeColor="#aacfcf" percent={progressRate} status="active" style={{ margin: '10px 0 20px 0'}}/>
-      <div style={{ overflow: 'scroll' }}>
+      <div>
         {questions.map((question, i) => (
           <UnicornRadio onChecked={() => onAnswer(i)} key={`radio_${i}`}>{ question }</UnicornRadio>
         ))}

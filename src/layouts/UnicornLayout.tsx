@@ -5,16 +5,16 @@ import styled from "styled-components";
 const { Content } = Layout;
 
 const UnicornDiv = styled(Layout)`
-  height: 100%;
+  width: 100%;
   background: white;
 `
 
 const UnicornContent = styled(Content)`
-  padding: 0 10px;
-  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 `
 
-function UnicornFlexLayout({ children }: { children: React.ReactNode }) {
+function UnicornLayout({ children }: { children: React.ReactNode }) {
   return (
     <UnicornDiv className="layout">
       <UnicornContent>
@@ -24,4 +24,4 @@ function UnicornFlexLayout({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default UnicornFlexLayout
+export default UnicornLayout
