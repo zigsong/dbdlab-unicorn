@@ -45,6 +45,7 @@ const UnicornProgress = styled(Progress)`
     display: block;
     border-radius: 0;
     background: #d8d8d8;
+    max-width: 600px;
   }
 `;
 
