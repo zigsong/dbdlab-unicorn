@@ -333,7 +333,7 @@ function UnicornResult(props: RouteChildrenProps) {
 
   return (
     <UnicornLayout>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '-webkit-fill-available' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ width: "100%", position: "relative" }}>
           <ResultBg src={resultBg} alt="result-bg" />
         </div>
