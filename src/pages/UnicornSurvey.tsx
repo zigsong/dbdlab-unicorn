@@ -137,9 +137,11 @@ function Survey(props: RouteChildrenProps) {
 
   const goResult = () => {
     const { history } = props;
+    const userAnswer = answered.join("") ?? "AAAAAAAAAA"
+
     history.push({
-      pathname: '/result',
-      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+      pathname: '/loading',
+      search: "?" + new URLSearchParams({ serviceName: serviceName ?? "Whonicorn", userAnswer }).toString()
     })
   }
 

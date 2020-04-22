@@ -76,6 +76,12 @@ function UnicornHome(props: RouteChildrenProps) {
     - 특수문자, 숫자 모두 가능
   */
 
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if(e.key === "Enter"){
+      onNext();
+    }
+  }
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setServiceName(value);
@@ -94,7 +100,7 @@ function UnicornHome(props: RouteChildrenProps) {
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1 }}>
           <UnicornText className="label">검사하고 싶은<br />제품/서비스명을 입력해주세요.</UnicornText>
-          <UnicornInput onChange={onChange} maxLength={20} />
+          <UnicornInput onChange={onChange} maxLength={20} onKeyPress={handleEnter} />
           <UnicornButton onClick={onNext} disabled={serviceName === ""}>다음</UnicornButton>
         </div>
         <div style={{ flex: 1, width: '100%', position: 'relative', zIndex: 0 }}>

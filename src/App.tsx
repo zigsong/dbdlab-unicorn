@@ -8,6 +8,7 @@ import history from './history';
 import UnicornHome from './pages/UnicornHome';
 import UnicornEntry from './pages/UnicornEntry';
 import UnicornSurvey from './pages/UnicornSurvey';
+import UnicornLoading from './pages/UnicornLoading';
 import UnicornResult from './pages/UnicornResult';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/" component={UnicornHome}/>
             <Route path="/entry" component={UnicornEntry} />
             <Route path="/survey" component={UnicornSurvey}/>
+            <Route path="/loading" component={UnicornLoading}/>
             <Route path="/result" component={UnicornResult}/>
           </Router>
       </BrowserRouter>
