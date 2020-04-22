@@ -116,6 +116,8 @@ const UnicornHashTag = styled(UnicornTextRegular)`
   font-size: 12px;
   line-height: 18px;
   text-align: center;
+`
+
 const BannerImg = styled.img`
   width: 100%;
   height: auto;
