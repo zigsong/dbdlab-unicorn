@@ -87,6 +87,7 @@ const ShareMenu = styled.div`
   height: 80px;
   display:flex;
   flex-direction: row;
+  margin-top: 60px;
 `
 const FeedbackIcon = styled.img`
   width: 46px;
@@ -123,6 +124,13 @@ const BannerImg = styled.img`
   height: auto;
 `
 
+const ShareButton = styled.button`
+  border:none;
+  background:none;
+  width: 50px;
+  height: 50px;
+`
+
 const unicorns = [
   UnicornMagician, UnicornCameleon, UnicornLoyal,
   UnicornSuperstar, UnicornTransparent, UnicornResearcher,
@@ -139,8 +147,8 @@ function UnicornResult(props: RouteChildrenProps) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [feedbackOption, setFeedbackOption] = useState("0");
   const location = useLocation();
-  const serviceName = new URLSearchParams(location.search).get("serviceName");
-  const userAnswer = new URLSearchParams(location.search).get("userAnswer")
+  const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
+  const userAnswer = decodeURIComponent(atob(new URLSearchParams(location.search).get("ua") ?? ""));
 
   const motivation = userAnswer?.substr(0, 3)
   const autonomy = userAnswer?.substr(9, 3)
@@ -185,6 +193,25 @@ function UnicornResult(props: RouteChildrenProps) {
       // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
   }
+
+  const onShareFacebook = () => {
+    const anyWindow: any = window;
+    anyWindow.FB.ui({
+      method: 'share'
+    })
+  }
+
+  const onShareKakao = () => {
+
+  }
+
+  const onShareSlack = () => {
+
+  }
+
+  const onShareLink = () => {
+
+  }
  
   useEffect(() => {
     const script = document.createElement('script');
@@ -193,17 +220,22 @@ function UnicornResult(props: RouteChildrenProps) {
     script.async = true;
     script.defer = true;
     script.crossOrigin = 'anonymous';
-  
+    
+    const anyWindow: any = window;
+    anyWindow.fbAsyncInit = function() {
+      anyWindow.FB.init({
+        appId      : '594947074445777',
+        xfbml      : true,
+        version    : 'v6.0'
+      });
+    };
+    
     document.body.appendChild(script);
   
     return () => {
       document.body.removeChild(script);
     }
   }, []);
-
-  const meta = {
-
-  }
 
   const selectFeedback = (choice: string) => {
     if (feedbackOption === choice) {
@@ -231,20 +263,21 @@ function UnicornResult(props: RouteChildrenProps) {
         </UnicornHashTag>
 
         <ShareMenu>
-          <UnicornTextBold style={{ flex: 1, color: '#4a4a4a', fontSize: '10px', marginLeft: '21px' }}>
+          <UnicornTextBold style={{ flex: 1, color: '#4a4a4a', fontSize: '10px', marginTop: '14px', marginLeft: '21px' }}>
             다른 사람들과 공유해보세요!
           </UnicornTextBold>
-          {/* <div className="fb-share-button" data-href="https://realdopt.com/">
-            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frealdopt.com%2F&amp;src=sdkpreparse" >
-              <img src={facebook_icon} alt="facebook" style={{ marginLeft: '28px', marginRight: '14px'}} />
-            </a>
-          </div> */}
-          <div className="fb-share-button" data-href="https://realdopt.com/" data-layout="icon_link" >
-            {/* <img src={facebook_icon} alt="facebook" style={{ marginLeft: '28px', marginRight: '14px'}} /> */}
-          </div>
-          <img src={kakao_icon} alt="kakao" style={{ marginRight: '14px'}} />
-          <img src={slack_icon} alt="slack" style={{ marginRight: '14px'}} />
-          <img src={link_icon} alt="link" style={{ marginRight: '12px' }}/>
+          <ShareButton type="button" onClick={onShareFacebook}>
+            <img src={facebook_icon} alt="facebook" />
+          </ShareButton>
+          <ShareButton type="button" onClick={onShareKakao}>
+            <img src={kakao_icon} alt="kakao" />
+          </ShareButton >
+          <ShareButton type="button" onClick={onShareSlack}>
+            <img src={slack_icon} alt="slack"/>
+          </ShareButton>
+          <ShareButton type="button" onClick={onShareLink}>
+            <img src={link_icon} alt="link" />
+          </ShareButton>
         </ShareMenu>
       </div>
 
@@ -254,9 +287,11 @@ function UnicornResult(props: RouteChildrenProps) {
         <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '22px', whiteSpace: 'pre-line' }}>
           {unicorn.description1}
         </UnicornTextRegular>
-        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '11px', whiteSpace: 'pre-line' }}>{unicorn.caption2}</UnicornTextRegular>
+        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '11px', whiteSpace: 'pre-line' }}>{unicorn.title + "의 대표님은" }</UnicornTextRegular>
         <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '42px', whiteSpace: 'pre-line' }}>
-          {unicorn.description2}
+          {unicorn.guess1}<br />
+          {unicorn.guess2}<br />
+          {unicorn.guess3}
         </UnicornTextRegular>
       </div>
 

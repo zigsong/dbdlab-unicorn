@@ -36,14 +36,17 @@ const GreyCorn = styled.img`
 
 function UnicornHome(props: RouteChildrenProps) {
   const location = useLocation();
-  const serviceName = new URLSearchParams(location.search).get("serviceName")
-  const userAnswer = new URLSearchParams(location.search).get("userAnswer")
+  const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
+  const userAnswer = decodeURIComponent(atob(new URLSearchParams(location.search).get("ua") ?? ""));
 
   setTimeout(() => {
     const { history } = props;
     history.push({
       pathname: '/result',
-      search: "?" + new URLSearchParams({ serviceName: serviceName ?? "Whonicorn", userAnswer: userAnswer ?? "AAAAAAAAAAAA" }).toString()
+      search: "?" + new URLSearchParams({
+        sn: btoa(encodeURIComponent(serviceName)),
+        ua: btoa(encodeURIComponent(userAnswer))
+      }).toString()
     })
   }, 3000)
 

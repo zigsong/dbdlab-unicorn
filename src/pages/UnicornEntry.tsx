@@ -91,7 +91,9 @@ function UnicornHome(props: RouteChildrenProps) {
     const { history } = props;
     history.push({
       pathname: '/survey',
-      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+      search: "?" + new URLSearchParams({
+        sn: btoa(encodeURIComponent(serviceName ? serviceName : "Whonicorn"))
+      }).toString()
     })
   }
 

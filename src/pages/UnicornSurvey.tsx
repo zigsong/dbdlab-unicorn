@@ -122,7 +122,7 @@ const getQuestions = (serviceName: string) => ([
 
 function Survey(props: RouteChildrenProps) {
   const location = useLocation();
-  const serviceName = new URLSearchParams(location.search).get("serviceName")
+  const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""))
   const questions = getQuestions(serviceName ?? "귀하의 서비스");
 
   const [answered, setAnswered] = useState((new Array(questions.length)).fill(false))
@@ -142,7 +142,10 @@ function Survey(props: RouteChildrenProps) {
 
     history.push({
       pathname: '/loading',
-      search: "?" + new URLSearchParams({ serviceName: serviceName ?? "Whonicorn", userAnswer }).toString()
+      search: "?" + new URLSearchParams({
+        sn: btoa(encodeURIComponent(serviceName ?? "Whonicorn")),
+        ua: btoa(encodeURIComponent(userAnswer))
+      }).toString()
     })
   }
 
