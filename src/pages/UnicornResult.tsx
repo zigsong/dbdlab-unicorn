@@ -42,6 +42,9 @@ import UnicornToast from "../components/UnicornToast";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UnicornLayout from '../layouts/UnicornLayout';
+
+import banner_sub1 from "../assets/whonicorn_bn_sub_img-10.png";
+import banner_sub2 from "../assets/whonicorn_bn_sub_img-11.png";
 import _ from "lodash";
   
 const ResultBg = styled.img`
@@ -113,6 +116,9 @@ const UnicornHashTag = styled(UnicornTextRegular)`
   font-size: 12px;
   line-height: 18px;
   text-align: center;
+const BannerImg = styled.img`
+  width: 100%;
+  height: auto;
 `
 
 const unicorns = [
@@ -158,6 +164,22 @@ function UnicornResult(props: RouteChildrenProps) {
     const { history } = props;
     history.push({
       pathname: '/entry',
+      // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+    })
+  }
+
+  const goTeamSub = () => {
+    const { history } = props;
+    history.push({
+      pathname: '/team_sub',
+      // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+    })
+  }
+
+  const goUserSub = () => {
+    const { history } = props;
+    history.push({
+      pathname: '/user_sub',
       // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
   }
@@ -270,7 +292,10 @@ function UnicornResult(props: RouteChildrenProps) {
               <UnicornTextBold className="feedback">안 맞아요</UnicornTextBold>
             </FeedbackWrapper>
           </div>
-          <UnicornButton style={{ marginBottom: '76px' }} onClick={goEntry}>다시 해볼래요!</UnicornButton>
+          <UnicornButton style={{ marginBottom: '93px' }} onClick={goEntry}>다시 해볼래요!</UnicornButton>
+          <BannerImg src={banner_sub1} onClick={goTeamSub} />
+          <BannerImg src={banner_sub2} onClick={goUserSub} />
+
       </div>
     </UnicornLayout>
   );

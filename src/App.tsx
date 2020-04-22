@@ -10,6 +10,8 @@ import UnicornEntry from './pages/UnicornEntry';
 import UnicornSurvey from './pages/UnicornSurvey';
 import UnicornLoading from './pages/UnicornLoading';
 import UnicornResult from './pages/UnicornResult';
+import UnicornSub_1 from './pages/UnicornSub_1';
+import UnicornSub_2 from './pages/UnicornSub_2';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/survey" component={UnicornSurvey}/>
             <Route path="/loading" component={UnicornLoading}/>
             <Route path="/result" component={UnicornResult}/>
+            <Route path="/team_sub" component={UnicornSub_1}/>
+            <Route path="/user_sub" component={UnicornSub_2}/>
           </Router>
       </BrowserRouter>
   );
