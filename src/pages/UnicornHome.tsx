@@ -13,157 +13,158 @@ import ImgUnicornHomeBackground from "../assets/unicorn-bg.png";
 import ImgDownArrow from "../assets/unicorn-down-arrow.png";
 import ImgDbdLogo from "../assets/img_dbd_ci.png";
 
+// Sections
+const MainSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SubSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+// Components
+const UnicornLogo = styled.img`
+  width: 80%;
+  margin: 70px auto 0;
+`
+
+const UnicornTitle = styled.img`
+  width: 80%;
+  margin: 20px auto 0;
+`
+
+const UnicornTextRegular = styled.p`
+  display: inline-block;
+  font-family: 'NanumSquare Regular';
+`
+
+const UnicornTextBold = styled.p`
+  display: inline-block;
+  font-family: 'NanumSquare Bold';
+`
+
+const UnicornHashTag = styled(UnicornTextRegular)`
+  width: 70%;
+  margin-top: 16px;
+  color: #9B9B9B;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+`
+
+const UnicornSubTitle = styled(UnicornTextRegular)`
+  width: 70%;
+  color: #646464;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+`
+
+const UnicornStartBtn = styled(Button)`
+  width: 70vw;
+  height: 14vw;
+  max-width: 420px;
+  max-height: 84px;
+  margin-top: 45px;
+  display: inline-block;
+  position: relative;
+  font-family: 'NanumSquare Bold';
+  font-size: 16px;
+  line-height: 22px;
+  background-color: #7986cb;
+  color: #ffffff;
+
+  &:hover {
+    border-color: #7986cb;
+    color: #7986cb;
+    background-color: #ffffff;
+  }
+
+  img {
+    position: absolute;
+    &.deco-1 {
+      left: -5px;
+      bottom: -13px;
+    }
+    &.deco-2 {
+      right: -12px;
+      top: -9px;
+    }
+  }
+`
+const UnicornScroll = styled.div`
+  margin-top: 104px;
+  display: inline-block;
+
+  span {
+    font-size: 12px;
+    font-family: 'NanumSquare Regular';
+    color: #646464;
+
+    &.bold {
+      font-family: 'NanumSquare Bold';
+    }
+    
+    &.light {
+      color: #9b9b9b;
+    }
+  }
+`;
+
+const UnicornBackground = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const UnicornLetter = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  padding: 0 33px;
+`;
+
+const UnicornLink = styled.a`
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100%;
+  height: 70px;
+  margin: 1px 1px 1px 1px;
+  color: #696969;
+  font-size: 13px;
+  verical-align: middle;
+  padding-left: 29px;
+`
+
+const RightArrow = styled.img`
+  width: 16px;
+  height: 15px;
+  transform: rotate(270deg);
+  position: absolute;
+  right: 30px;
+`;
+
+
 function UnicornHome(props: RouteChildrenProps) {
   const onStart = () => {
     const { history } = props;
     history.push("/entry");
   }
   
-  // Sections
-  const MainSection = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `;
-
-  const SubSection = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `;
-
-  const Footer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `;
-
-  // Components
-  const UnicornLogo = styled.img`
-    width: 80%;
-    margin: 70px auto 0;
-  `
   
-  const UnicornTitle = styled.img`
-    width: 80%;
-    margin: 20px auto 0;
-  `
-  
-  const UnicornTextRegular = styled.text`
-    display: inline-block;
-    font-family: 'NanumSquare Regular';
-  `
-
-  const UnicornTextBold = styled.text`
-    display: inline-block;
-    font-family: 'NanumSquare Bold';
-  `
-
-  const UnicornHashTag = styled(UnicornTextRegular)`
-    width: 70%;
-    margin-top: 16px;
-    color: #9B9B9B;
-    font-size: 12px;
-    line-height: 18px;
-    text-align: center;
-  `
-
-  const UnicornSubTitle = styled(UnicornTextRegular)`
-    width: 70%;
-    color: #646464;
-    font-size: 12px;
-    line-height: 18px;
-    text-align: center;
-  `
-
-  const UnicornStartBtn = styled(Button)`
-    width: 70vw;
-    height: 14vw;
-    max-width: 420px;
-    max-height: 84px;
-    margin-top: 45px;
-    display: inline-block;
-    position: relative;
-    font-family: 'NanumSquare Bold';
-    font-size: 16px;
-    line-height: 22px;
-    background-color: #7986cb;
-    color: #ffffff;
-
-    &:hover {
-      border-color: #7986cb;
-      color: #7986cb;
-      background-color: #ffffff;
-    }
-
-    img {
-      position: absolute;
-      &.deco-1 {
-        left: -5px;
-        bottom: -13px;
-      }
-      &.deco-2 {
-        right: -12px;
-        top: -9px;
-      }
-    }
-  `
-  const UnicornScroll = styled.div`
-    margin-top: 104px;
-    display: inline-block;
-
-    span {
-      font-size: 12px;
-      font-family: 'NanumSquare Regular';
-      color: #646464;
-  
-      &.bold {
-        font-family: 'NanumSquare Bold';
-      }
-      
-      &.light {
-        color: #9b9b9b;
-      }
-    }
-  `;
-
-  const UnicornBackground = styled.img`
-    width: 100%;
-    height: 100%;
-  `;
-
-  const UnicornLetter = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    padding: 0 33px;
-  `;
-
-  const UnicornLink = styled.a`
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    width: 100%;
-    height: 70px;
-    margin: 1px 1px 1px 1px;
-    color: #696969;
-    font-size: 13px;
-    verical-align: middle;
-    padding-left: 29px;
-  `
-
-  const RightArrow = styled.img`
-    width: 16px;
-    height: 15px;
-    transform: rotate(270deg);
-    position: absolute;
-    right: 30px;
-  `;
-
   return (
     <UnicornLayout>
-
       <MainSection>
         <UnicornLogo src={ImgUnicornLogo} alt="unicornLogo" />
         <UnicornTitle src={ImgUnicornTitle} alt="unicornTitle" />

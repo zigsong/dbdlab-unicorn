@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import WhonicornLeft from "../assets/img_range_left.png";
+import WhonicornMid from "../assets/img_range_mid.png";
+import WhonicornRight from "../assets/img_range_right.png";
 
 const StyledDiv = styled.div`
   width: 100%;
@@ -8,6 +11,23 @@ const StyledDiv = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  .Caption1, .Caption2 {
+    width: 35%;
+    font-family: 'NanumSquare Bold';
+    font-size: 10px;
+    position: absolute;
+    bottom: 5px;
+  }
+  .Caption1 {
+    text-align: left;
+    left: 33px;
+  }
+
+  .Caption2 {
+    text-align: right;
+    right: 33px;
+  }
 `
 
 // const StyledRadioGroup = styled(Radio.Group)`
@@ -30,61 +50,113 @@ const Caption = styled.div`
 const RadioGroup = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+
+  width: 80%;
+  height: 30px;
+  margin-top: 0px;
+
   .option {
-    border-radius: 50%;
-    margin: 0 10px;
-    &.max {
-      width: 34px;
-      height: 34px;
-    };
-    &.med {
-      width: 29px;
-      height: 29px;
-      
-    };
-    &.min {
-      width: 24px;
-      height: 24px;
-      
-    };
-    &.neutral {
-      width: 19px;
-      height: 19px;
-      
-    };
-    &.agree {   
-      border: 2px solid #aacfcf;
-      &:hover {
-        background: #aacfcf;
+    width: 44px;
+    height: 44px;
+    
+    &:hover {
+      div {
+        border-color: #c7c8f3 !important;
+        background: #a7a8d3;
       }
-      &.selected {
-        background: #aacfcf;
+    }
+
+    div.selected  {
+      border-color: #c7c8f3 !important;
+      background: #a7a8d3;
+
+      &.agree {
+        border: none;
+        background: url(${WhonicornLeft});
+        background-position: center;
+        background-size: 34px;
+        background-repeat: no-repeat;
       }
-    };
-    &.disagree {
-      border: 2px solid #ffb6b6;
-      &:hover {
-        background: #ffb6b6;
+
+      &.disagree {
+        border: none;
+        background: url(${WhonicornRight});
+        background-position: center;
+        background-size: 34px;
+        background-repeat: no-repeat;
       }
-      &.selected {
-        background: #ffb6b6;
+
+      &.neutral {
+        border: none;
+        background: url(${WhonicornMid});
+        background-position: center;
+        background-size: 34px;
+        background-repeat: no-repeat;
       }
-    };
-    &.neutral {
-      border: 2px solid #C4C4C4;
-      &:hover {
-        background: #C4C4C4;
-      }
-      &.selected {
-        background: #C4C4C4;
+    }
+
+    div {
+      padding: 0px;
+      border-radius: 50%;
+      background: #cacaca;
+  
+      &.max {
+        width: 20px;
+        height: 20px;
+        margin: 12px;
+      };
+      &.med {
+        width: 20px;
+        height: 20px;
+        margin: 12px;
+      };
+      &.min {
+        width: 20px;
+        height: 20px;
+        margin: 12px;
+      };
+      &.neutral {
+        width: 14px;
+        height: 14px;
+        margin: 15px;     
+      };
+      &.agree, &.disagree {   
+        border: 6px solid #dcdcdc;
+      };
+      &.neutral {
+        border: 4px solid #dcdcdc;
       }
     }
   }
 `
+
+const UnicornText = styled.div`
+  width: 90%;
+  margin-top: 32px;
+  margin-left: 10%;
+  
+  p {
+    font-family: 'NanumSquare Bold';
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.47;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    text-align: left;
+    margin-bottom: 0;
+  }
+`;
+
 interface StyledRadioProps {
-  onChecked: () => void;
-  children: React.ReactNode
+  onChecked: (s: string) => void;
+  children: React.ReactNode;
+  data: {
+    title: string[],
+    answers: string[],
+  }
 }
 
 function UnicornRadio(props: StyledRadioProps) {
@@ -92,42 +164,54 @@ function UnicornRadio(props: StyledRadioProps) {
   
   useEffect(() => {
     if (checked) {
-      props.onChecked();
+      props.onChecked(checked);
     }
   }, [checked, props])
 
   return (
     <StyledDiv style={{ marginBottom: '30px' }}>
-    <p>{props.children}</p>
+      <UnicornText>{props.children}</UnicornText>
+      <div style={{ width: "100%", position: "relative", "height": "50px"}}>
+        <Caption className="Caption1">{ props.data.answers[0] }</Caption>
+        <Caption className="Caption2">{ props.data.answers[1] }</Caption>
+      </div>
       <RadioGroup>
-        <div>
+        <div className={"option"}  onClick={() => setChecked("A")}>
+          {checked === "A"  ? (<img src={WhonicornLeft} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
+           : (<div className="option agree max"></div>)}
           <input style={{ display: 'none' }} type="radio" value="A" />
-          <div className={"option agree max " + (checked === "A" ? 'selected' : "")} onClick={() => setChecked("A")}></div>
-          <Caption>매우 그렇다</Caption>
         </div>
-        <div className={"option agree med " + (checked === "B" ? 'selected' : "")} onClick={() => setChecked("B")}>
-          <input style={{ display: 'none' }} type="radio" value="B"></input>
+        <div className={"option"}  onClick={() => setChecked("B")}>
+          {checked === "B"  ? (<img src={WhonicornLeft} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
+           : (<div className="option agree med"></div>)}
+          <input style={{ display: 'none' }} type="radio" value="B" />
         </div>
-        <div className={"option agree min " + (checked === "C" ? 'selected' : "")} onClick={() => setChecked("C")}>
-          <input style={{ display: 'none' }} type="radio" value="C"></input>  
+        <div className={"option"}  onClick={() => setChecked("C")}>
+          {checked === "C"  ? (<img src={WhonicornLeft} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
+           : (<div className="option agree min"></div>)}
+          <input style={{ display: 'none' }} type="radio" value="C" />
         </div>
-        <div className={"option neutral " + (checked === "D" ? 'selected' : "")} onClick={() => setChecked("D")}>
-          <input style={{ display: 'none' }} type="radio" value="D"></input>
+        <div className={"option"}  onClick={() => setChecked("D")}>
+          {checked === "D"  ? (<img src={WhonicornMid} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
+           : (<div className="option neutral"></div>)}
+          <input style={{ display: 'none' }} type="radio" value="D" />
         </div>
-        <div className={"option disagree min " + (checked === "E" ? 'selected' : "")} onClick={() => setChecked("E")}>
-          <input style={{ display: 'none' }} type="radio" value="E"></input>
+        <div className={"option"}  onClick={() => setChecked("E")}>
+          {checked === "E"  ? (<img src={WhonicornRight} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
+           : (<div className="option disagree min"></div>)}
+          <input style={{ display: 'none' }} type="radio" value="E" />
         </div>
-        <div className={"option disagree med " + (checked === "F" ? 'selected' : "")} onClick={() => setChecked("F")}>
-          <input style={{ display: 'none' }} type="radio" value="F"></input>
+        <div className={"option"}  onClick={() => setChecked("F")}>
+          {checked === "F"  ? (<img src={WhonicornRight} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
+           : (<div className="option disagree med"></div>)}
+          <input style={{ display: 'none' }} type="radio" value="F" />
         </div>
-        <div>
-          <div className={"option disagree max " + (checked === "G" ? 'selected' : "")} onClick={() => setChecked("G")}>
-            <input style={{ display: 'none' }} type="radio" value="G  "></input>
-          </div>
-          <Caption>전혀 그렇지 않다</Caption>
+        <div className={"option"}  onClick={() => setChecked("G")}>
+          {checked === "G"  ? (<img src={WhonicornRight} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
+           : (<div className="option disagree max"></div>)}
+          <input style={{ display: 'none' }} type="radio" value="G" />
         </div>
       </RadioGroup>
-
     </StyledDiv>
   )
 }
