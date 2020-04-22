@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import resultBg from "../assets/img_result_bg.png";
-import facebook_icon from "../assets/group-9.svg";
-import kakao_icon from "../assets/group-7.svg";
-import slack_icon from "../assets/group-6.svg";
-import link_icon from "../assets/group-5.svg";
-import dbdLogo from "../assets/img_dbd_ci.png";
-// import MetaTags from 'react-meta-tags';
+import { Button } from 'antd';
+
 import UnicornMagician from "../texts/UnicornMagician";
 import UnicornJudge from "../texts/UnicornJudge";
 import UnicornLoyal from "../texts/UnicornLoyal";
@@ -17,6 +12,12 @@ import UnicornSand from "../texts/UnicornSand";
 import UnicornSuperstar from "../texts/UnicornSuperstar";
 import UnicornSurfer from "../texts/UnicornSurfer";
 import UnicornTransparent from "../texts/UnicornTransparent";
+import resultBg from "../assets/img_result_bg.png";
+import facebook_icon from "../assets/group-9.svg";
+import kakao_icon from "../assets/group-7.svg";
+import slack_icon from "../assets/group-6.svg";
+import link_icon from "../assets/group-5.svg";
+import dbdLogo from "../assets/img_dbd_ci.png";
 
 import whonicorn_1 from "../assets/img_whonicorn1.png";
 import whonicorn_2 from "../assets/img_whonicorn2.png";
@@ -38,13 +39,16 @@ import feedback4_off from "../assets/btn_feedback4_off.png";
 import feedback4_on from "../assets/btn_feedback4_on.png";
 import feedback5_off from "../assets/btn_feedback5_off.png";
 import feedback5_on from "../assets/btn_feedback5_on.png";
-import UnicornToast from "../components/UnicornToast";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import UnicornLayout from '../layouts/UnicornLayout';
 
 import banner_sub1 from "../assets/whonicorn_bn_sub_img-10.png";
 import banner_sub2 from "../assets/whonicorn_bn_sub_img-11.png";
+
+import 'react-toastify/dist/ReactToastify.css';
+
+import UnicornToast from "../components/UnicornToast";
+import { ToastContainer, toast } from 'react-toastify';
+import UnicornLayout from '../layouts/UnicornLayout';
+
 import _ from "lodash";
   
 const ResultBg = styled.img`
@@ -94,14 +98,24 @@ const FeedbackIcon = styled.img`
   height: 46px; 
   margin-bottom: 5px;
 `
-const UnicornButton = styled.button`
-  width: 270px;
+const UnicornButton = styled(Button)`
+width: 270px;
   height: 54px;
   display: inline-block;
   position: relative;
   background-color: #7986cb;
   font-family: 'NanumSquare Bold';
   color: #ffffff;
+  
+  &:hover {
+    border-color: #7986cb;
+    color: #7986cb;
+    background-color: #ffffff;
+  }
+
+  &.ant-btn[disabled] {
+    background-color: #cacaca;
+  }
 `
 const FeedbackWrapper = styled.div`
   display: flex;
@@ -131,6 +145,66 @@ const ShareButton = styled.button`
   height: 50px;
 `
 
+const getPointColor = (point: number) => {
+  switch (point) {
+    case 1: return "#f06292"
+    case 2: return "#ba68c8"
+    case 3: return "#7a86cb"
+    case 4: return "#6aa9e5"
+    case 5: return "#4fc3f7"
+    default: return "#cacaca"
+  }
+}
+
+const getPointMsg = (point: number) => {
+  switch (point) {
+    case 1: return "낮음"
+    case 2: return "약간 낮음"
+    case 3: return "중간"
+    case 4: return "약간 높음"
+    case 5: return "높음"
+    default: return "알 수 없음"
+  }
+}
+
+const PointBlock = styled.div`
+  .point {
+    height: 10px;
+    .box1 {
+      background-color: #f06292;
+    }
+    .box2 {
+      background-color: #ba68c8;
+    } 
+    .box3 {
+      background-color: #7a86cb;
+    } 
+    .box4 {
+      background-color: #6aa9e5;
+    } 
+    .box5 {
+      background-color: #4fc3f7;
+    } 
+    .box1, .box2, .box3, .box4, .box5 {
+      width: 14px;
+      height: 10px;
+      margin-right: 2px;
+
+      &.disabled {
+        background-color: #cacaca;s
+      }
+    }
+  }
+`
+
+const DottedLine = styled.div`
+  background-image: linear-gradient(to right, #9b9b9b 70%, rgba(255,255,255,0) 0%);
+  background-position: bottom;
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+`;
+
 const unicorns = [
   UnicornMagician, UnicornCameleon, UnicornLoyal,
   UnicornSuperstar, UnicornTransparent, UnicornResearcher,
@@ -142,6 +216,17 @@ const unicornImgs = [
   whonicorn_4, whonicorn_5, whonicorn_6,
   whonicorn_7, whonicorn_8, whonicorn_9
 ];
+
+const statHeaders = [
+  ["뜻밖의 발견", "Serendipity"],
+  ["상황인지", "Agent Awareness"],
+  ["게임성", "Playability"],
+  ["친화력", "Adaptivity"],
+  ["기존 경험과 호환", "Compatibility Applicability"],
+  ["맞춤화", "Customizability"],
+  ["일관성", "Consistency"],
+  ["적정 난이도", "Challenge"],
+]
 
 function UnicornResult(props: RouteChildrenProps) {
   const [isLoaded, setIsLoaded] = useState(true);
@@ -252,16 +337,16 @@ function UnicornResult(props: RouteChildrenProps) {
         <div style={{ width: "100%", position: "relative" }}>
           <ResultBg src={resultBg} alt="result-bg" />
         </div>
-
-        <UnicornTextBold style={{ color: '#646464', fontSize: '17px', marginTop: '186px', marginBottom: '3px' }}>[{serviceName}]의 유니콘은..</UnicornTextBold>
-        <UnicornTextBold style={{ color: '#7986cb', fontSize: '36px', marginBottom: '22px' }}>{unicorn.title}</UnicornTextBold>
-        
+        <UnicornTextBold style={{ color: '#646464', fontSize: '17px', marginTop: '186px', marginBottom: '3px' }}>
+          [{serviceName}] 의 유니콘은..
+        </UnicornTextBold>
+        <UnicornTextBold style={{ color: '#7986cb', fontSize: '36px', marginBottom: '22px' }}>
+          {unicorn.title}
+        </UnicornTextBold>
         <WhonicornImg src={unicornImg} alt="whonicorn-1" />
-
         <UnicornHashTag>
           #디비디랩_유니콘테스트 #후니콘
         </UnicornHashTag>
-
         <ShareMenu>
           <UnicornTextBold style={{ flex: 1, color: '#4a4a4a', fontSize: '10px', marginTop: '14px', marginLeft: '21px' }}>
             다른 사람들과 공유해보세요!
@@ -282,12 +367,18 @@ function UnicornResult(props: RouteChildrenProps) {
       </div>
 
       <div style={{ marginLeft: '33px', marginRight: '33px' }}>
-        <UnicornTextBold style={{ color: '#7986cb', fontSize: '20px', marginTop: '37px', marginBottom: '17px' }}>{unicorn.title}</UnicornTextBold>
-        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '22px', whiteSpace: 'pre-line' }}>{unicorn.caption1}</UnicornTextRegular>
+        <UnicornTextBold style={{ color: '#7986cb', fontSize: '20px', marginTop: '37px', marginBottom: '17px' }}>
+          {unicorn.title}
+        </UnicornTextBold>
+        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '22px', whiteSpace: 'pre-line' }}>
+          {unicorn.caption1}
+        </UnicornTextRegular>
         <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '22px', whiteSpace: 'pre-line' }}>
           {unicorn.description1}
         </UnicornTextRegular>
-        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '11px', whiteSpace: 'pre-line' }}>{unicorn.title + "의 대표님은" }</UnicornTextRegular>
+        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '11px', whiteSpace: 'pre-line' }}>
+          {unicorn.title + "의 대표님은" }
+        </UnicornTextRegular>
         <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '42px', whiteSpace: 'pre-line' }}>
           {unicorn.guess1}<br />
           {unicorn.guess2}<br />
@@ -295,9 +386,62 @@ function UnicornResult(props: RouteChildrenProps) {
         </UnicornTextRegular>
       </div>
 
-      {/* <div style={{ marginLeft: '33px', marginRight: '33px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '33px', marginRight: '33px' }}>
+
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <p style={{ color: '#282828', fontSize: '14px', fontFamily: 'NanumSquare Extra Bold' }}>Stats</p>
+          <p style={{ color: '#9b9b9b', fontSize: '10px', marginLeft: '7px', marginTop: '5px' }}>우리는 이정도다 덤벼라</p>
+        </div>
+        <DottedLine style={{ marginBottom: '15px' }}></DottedLine>
+        {unicorn.stats.filter((v, i) => i % 2 === 0).map((v, i) => (
+          <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '24px' }} key={`stat_${i}`}>
+            <PointBlock style={{ flex: 1 }}>
+              <div style={{ fontSize: "10px", color: "#4a4a4a", fontFamily: 'NanumSquare Bold' }}>{statHeaders[i*2][0]}</div>
+              <div style={{ fontSize: "10px", color: "#9b9b9b", fontFamily: 'NanumSquare Regular' }}>{statHeaders[i*2][1]}</div>
+              <div className="point" style={{ display: 'flex', flexDirection: 'row', marginTop: '8px' }}>
+                <div className={ "box1" + (unicorn.stats[i*2] >= 1 ? "" : " disabled") }></div>
+                <div className={ "box2" + (unicorn.stats[i*2] >= 2 ? "" : " disabled") }></div>
+                <div className={ "box3" + (unicorn.stats[i*2] >= 3 ? "" : " disabled") }></div>
+                <div className={ "box4" + (unicorn.stats[i*2] >= 4 ? "" : " disabled") }></div>
+                <div className={ "box5" + (unicorn.stats[i*2] >= 5 ? "" : " disabled") }></div>
+                <span style={{ fontSize: "10px", lineHeight: "10px", marginLeft: "6px", fontFamily: 'NanumSquare Regular',
+                  color: getPointColor(unicorn.stats[i*2])
+                }}>
+                  { getPointMsg(unicorn.stats[i*2]) }
+                  </span>
+              </div>
+            </PointBlock>
+            <PointBlock style={{ flex: 1 }}>
+              <div style={{ fontSize: "10px", color: "#4a4a4a", fontFamily: 'NanumSquare Bold' }}>{statHeaders[i*2+1][0]}</div>
+              <div style={{ fontSize: "10px", color: "#9b9b9b", fontFamily: 'NanumSquare Regular' }}>{statHeaders[i*2+1][1]}</div>
+              <div className="point" style={{ display: 'flex', flexDirection: 'row', marginTop: '8px' }}>
+                <div className={ "box1" + (unicorn.stats[i*2+1] >= 1 ? "" : " disabled") }></div>
+                <div className={ "box2" + (unicorn.stats[i*2+1] >= 2 ? "" : " disabled") }></div>
+                <div className={ "box3" + (unicorn.stats[i*2+1] >= 3 ? "" : " disabled") }></div>
+                <div className={ "box4" + (unicorn.stats[i*2+1] >= 4 ? "" : " disabled") }></div>
+                <div className={ "box5" + (unicorn.stats[i*2+1] >= 5 ? "" : " disabled") }></div>
+                <span style={{ fontSize: "10px", lineHeight: "10px", marginLeft: "6px", fontFamily: 'NanumSquare Regular',
+                  color: getPointColor(unicorn.stats[i*2+1])
+                }}>
+                  { getPointMsg(unicorn.stats[i*2+1]) }
+                </span>
+              </div>
+            </PointBlock>
+          </div>
+        ))}
+
         
-      </div> */}
+        <div style={{ display: 'flex', flexDirection: 'row', marginTop: '36px'}}>
+          <p style={{ color: '#282828', fontSize: '14px', fontFamily: 'NanumSquare Extra Bold' }}>Check List</p>
+          <p style={{ color: '#9b9b9b', fontSize: '10px', marginLeft: '7px', marginTop: '5px' }}>사용자의, 사용자에 의한, 사용자를 위한 ‘관리 지표’</p>
+        </div>
+        <DottedLine style={{ marginBottom: '15px' }}></DottedLine>
+        <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '24px' }}>
+          {unicorn.checkpoints.map((checkpoint, i) => (
+            <div style={{ flex: 1, maxWidth: "33%" }}>{ checkpoint }</div>
+          ))}
+        </div>
+      </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
           <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '15px', marginBottom: '2px' }}>whonicorn 결과는 어떠셨나요?</UnicornTextBold>
