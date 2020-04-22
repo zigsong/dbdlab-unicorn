@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import resultBg from "../assets/img_result_bg.png";
-import whonicorn_1 from "../assets/img_whonicorn1.png";
 import facebook_icon from "../assets/group-9.svg";
 import kakao_icon from "../assets/group-7.svg";
 import slack_icon from "../assets/group-6.svg";
@@ -10,6 +9,25 @@ import link_icon from "../assets/group-5.svg";
 import dbdLogo from "../assets/img_dbd_ci.png";
 // import MetaTags from 'react-meta-tags';
 import UnicornMagician from "../texts/UnicornMagician";
+import UnicornJudge from "../texts/UnicornJudge";
+import UnicornLoyal from "../texts/UnicornLoyal";
+import UnicornCameleon from "../texts/UnicornCameleon";
+import UnicornResearcher from "../texts/UnicornResearcher";
+import UnicornSand from "../texts/UnicornSand";
+import UnicornSuperstar from "../texts/UnicornSuperstar";
+import UnicornSurfer from "../texts/UnicornSurfer";
+import UnicornTransparent from "../texts/UnicornTransparent";
+
+import whonicorn_1 from "../assets/img_whonicorn1.png";
+import whonicorn_2 from "../assets/img_whonicorn2.png";
+import whonicorn_3 from "../assets/img_whonicorn3.png";
+import whonicorn_4 from "../assets/img_whonicorn4.png";
+import whonicorn_5 from "../assets/img_whonicorn5.png";
+import whonicorn_6 from "../assets/img_whonicorn6.png";
+import whonicorn_7 from "../assets/img_whonicorn7.png";
+import whonicorn_8 from "../assets/img_whonicorn8.png";
+import whonicorn_9 from "../assets/img_whonicorn9.png";
+
 import feedback1_off from "../assets/btn_feedback1_off.png";
 import feedback1_on from "../assets/btn_feedback1_on.png";
 import feedback2_off from "../assets/btn_feedback2_off.png";
@@ -23,13 +41,103 @@ import feedback5_on from "../assets/btn_feedback5_on.png";
 import UnicornToast from "../components/UnicornToast";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UnicornLayout from '../layouts/UnicornLayout';
+import _ from "lodash";
+  
+const ResultBg = styled.img`
+  position: absolute;
+  width: 300px;
+  height: 78px;
+  left: 0;
+  top: 0;
+`
+const UnicornTextBold = styled.p`
+  font-family: 'NanumSquare Bold';
+  display: block;
+  position: relative;
+  &.feedback {
+    color: #4a4a4a;
+    font-size: 10px;
+    text-align: center;
+  }
+`
+const UnicornTextRegular = styled.p`
+  font-family: 'NanumSquare Regular';
+  display: block;
+  position: relative;
+`
+const WhonicornImg = styled.img`
+  width: 342px;
+  height: 245px;
+  margin-bottom: 16px;
+`
+const UnicornFont = styled.text`
+  font-family: 'fromdamiM';
+  display: inline-block;
+  position: relative;
+`
+const ShareMenu = styled.div`
+  background-color: #f8f8f8;
+  align-items: center;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+`
+const FeedbackIcon = styled.img`
+  width: 46px;
+  height: 46px; 
+  margin-bottom: 5px;
+`
+const UnicornButton = styled.button`
+  width: 270px;
+  height: 54px;
+  display: inline-block;
+  position: relative;
+  background-color: #7986cb;
+  font-family: 'NanumSquare Bold';
+  color: #ffffff;
+`
+const FeedbackWrapper = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+`
+
+const unicorns = [
+  UnicornMagician, UnicornCameleon, UnicornLoyal,
+  UnicornSuperstar, UnicornTransparent, UnicornResearcher,
+  UnicornSurfer, UnicornSand, UnicornJudge
+];
+
+const unicornImgs = [
+  whonicorn_1, whonicorn_2, whonicorn_3,
+  whonicorn_4, whonicorn_5, whonicorn_6,
+  whonicorn_7, whonicorn_8, whonicorn_9
+];
 
 function UnicornResult(props: RouteChildrenProps) {
   const [isLoaded, setIsLoaded] = useState(true);
   const [feedbackOption, setFeedbackOption] = useState("0");
   const location = useLocation();
   const serviceName = new URLSearchParams(location.search).get("serviceName");
+  const userAnswer = new URLSearchParams(location.search).get("userAnswer")
 
+  const motivation = userAnswer?.substr(0, 3)
+  const autonomy = userAnswer?.substr(9, 3)
+
+  const x = motivation?.split("").map(c => c.charCodeAt(0) - 'D'.charCodeAt(0));
+  const y = autonomy?.split("").map(c => c.charCodeAt(0) - 'D'.charCodeAt(0)); 
+
+  const xMean = _.mean(x);
+  const yMean = _.mean(y)
+
+  let unicornIndex = 0;
+  unicornIndex += xMean < -0.6 ? 0 : (xMean <= 0.6 ? 1 : 2)
+  unicornIndex += yMean < -0.3 ? 6 : (yMean < 1 ? 3 : 0)
+
+  const unicorn = unicorns[unicornIndex];
+  const unicornImg = unicornImgs[unicornIndex];
   const onStart = () => {
     const { history } = props;
     history.push("/entry");
@@ -41,85 +149,7 @@ function UnicornResult(props: RouteChildrenProps) {
       pathname: '/entry',
       // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
-  } 
-
-
-  const ResultBg = styled.img`
-    position: absolute;
-    width: 300px;
-    height: 78px;
-    left: 0;
-    top: 0;
-  `
-
-  const UnicornTextBold = styled.text`
-    font-family: 'NanumSquare Bold';
-    display: block;
-    position: relative;
-    &.feedback {
-      color: #4a4a4a;
-      font-size: 10px;
-      text-align: center;
-    }
-  `
-
-  const UnicornTextRegular = styled.text`
-    font-family: 'NanumSquare Regular';
-    display: block;
-    position: relative;
-  `
-
-  const WhonicornImg = styled.img`
-    width: 342px;
-    height: 245px;
-    margin-bottom: 16px;
-  `
-
-  const UnicornFont = styled.text`
-    font-family: 'fromdamiM';
-    display: inline-block;
-    position: relative;
-  `
-
-  const ShareMenu = styled.div`
-    background-color: #f8f8f8;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    bottom: 0;
-    width: 100%;
-    height: 80px;
-  `
-
-  const FeedbackIcon = styled.img`
-    width: 46px;
-    height: 46px; 
-    margin-bottom: 5px;
-  `
-
-  const UnicornButton = styled.button`
-    width: 270px;
-    height: 54px;
-    display: inline-block;
-    position: relative;
-    background-color: #7986cb;
-    font-family: 'NanumSquare Bold';
-    color: #ffffff;
-  `
-
-  const FeedbackWrapper = styled.div`
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-  `
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoaded(true);
-  //   }, 100000)
-  // });
-
+  }
  
   useEffect(() => {
     const script = document.createElement('script');
@@ -148,14 +178,17 @@ function UnicornResult(props: RouteChildrenProps) {
     }
   }
   
+
   return (
-    <React.Fragment>
+    <UnicornLayout>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '-webkit-fill-available' }}>
-        <ResultBg src={resultBg} alt="result-bg" />
+        <div style={{ width: "100%", position: "relative" }}>
+          <ResultBg src={resultBg} alt="result-bg" />
+        </div>
+
         <UnicornTextBold style={{ color: '#646464', fontSize: '17px', marginTop: '186px', marginBottom: '3px' }}>[{serviceName}]의 유니콘은..</UnicornTextBold>
-        <UnicornTextBold style={{ color: '#7986cb', fontSize: '36px', marginBottom: '22px' }}>{UnicornMagician.title}</UnicornTextBold>
-        <WhonicornImg src={whonicorn_1} alt="whonicorn-1" />
-        <UnicornFont style={{ width: '178px', height: '46px', color: '#282828', fontSize: '22px', textAlign: 'center' }}>“아수라 발발타<br />나만 로또되게 해주세요..”</UnicornFont>
+        <UnicornTextBold style={{ color: '#7986cb', fontSize: '36px', marginBottom: '22px' }}>{unicorn.title}</UnicornTextBold>
+        <WhonicornImg src={unicornImg} alt="whonicorn-1" />
         <ShareMenu>
           <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '10px', marginLeft: '21px' }}>다른 사람들과 공유해보세요!</UnicornTextBold>
           {/* <div className="fb-share-button" data-href="https://realdopt.com/">
@@ -173,14 +206,14 @@ function UnicornResult(props: RouteChildrenProps) {
       </div>
 
       <div style={{ marginLeft: '33px', marginRight: '33px' }}>
-        <UnicornTextBold style={{ color: '#7986cb', fontSize: '20px', marginTop: '37px', marginBottom: '17px' }}>{UnicornMagician.title}</UnicornTextBold>
-        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '22px', whiteSpace: 'pre-line' }}>{UnicornMagician.caption1}</UnicornTextRegular>
+        <UnicornTextBold style={{ color: '#7986cb', fontSize: '20px', marginTop: '37px', marginBottom: '17px' }}>{unicorn.title}</UnicornTextBold>
+        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '22px', whiteSpace: 'pre-line' }}>{unicorn.caption1}</UnicornTextRegular>
         <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '22px', whiteSpace: 'pre-line' }}>
-          {UnicornMagician.description1}
+          {unicorn.description1}
         </UnicornTextRegular>
-        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '11px', whiteSpace: 'pre-line' }}>{UnicornMagician.caption2}</UnicornTextRegular>
+        <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '11px', whiteSpace: 'pre-line' }}>{unicorn.caption2}</UnicornTextRegular>
         <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '42px', whiteSpace: 'pre-line' }}>
-          {UnicornMagician.description2}
+          {unicorn.description2}
         </UnicornTextRegular>
       </div>
 
@@ -220,7 +253,7 @@ function UnicornResult(props: RouteChildrenProps) {
           </div>
           <UnicornButton style={{ marginBottom: '76px' }} onClick={goEntry}>다시 해볼래요!</UnicornButton>
       </div>
-    </React.Fragment>
+    </UnicornLayout>
   );
 }
 
