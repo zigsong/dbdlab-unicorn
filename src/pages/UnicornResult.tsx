@@ -82,6 +82,8 @@ const ShareMenu = styled.div`
   bottom: 0;
   width: 100%;
   height: 80px;
+  display:flex;
+  flex-direction: row;
 `
 const FeedbackIcon = styled.img`
   width: 46px;
@@ -102,6 +104,15 @@ const FeedbackWrapper = styled.div`
   position: relative;
   flex-direction: column;
   align-items: center;
+`
+
+const UnicornHashTag = styled(UnicornTextRegular)`
+  width: 70%;
+  margin-top: 16px;
+  color: #9B9B9B;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
 `
 
 const unicorns = [
@@ -188,9 +199,17 @@ function UnicornResult(props: RouteChildrenProps) {
 
         <UnicornTextBold style={{ color: '#646464', fontSize: '17px', marginTop: '186px', marginBottom: '3px' }}>[{serviceName}]의 유니콘은..</UnicornTextBold>
         <UnicornTextBold style={{ color: '#7986cb', fontSize: '36px', marginBottom: '22px' }}>{unicorn.title}</UnicornTextBold>
+        
         <WhonicornImg src={unicornImg} alt="whonicorn-1" />
+
+        <UnicornHashTag>
+          #디비디랩_유니콘테스트 #후니콘
+        </UnicornHashTag>
+
         <ShareMenu>
-          <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '10px', marginLeft: '21px' }}>다른 사람들과 공유해보세요!</UnicornTextBold>
+          <UnicornTextBold style={{ flex: 1, color: '#4a4a4a', fontSize: '10px', marginLeft: '21px' }}>
+            다른 사람들과 공유해보세요!
+          </UnicornTextBold>
           {/* <div className="fb-share-button" data-href="https://realdopt.com/">
             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frealdopt.com%2F&amp;src=sdkpreparse" >
               <img src={facebook_icon} alt="facebook" style={{ marginLeft: '28px', marginRight: '14px'}} />

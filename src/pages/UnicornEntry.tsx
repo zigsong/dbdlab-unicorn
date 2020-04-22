@@ -12,7 +12,7 @@ const UnicornText = styled.span`
     font-family: 'NanumSquare Bold';
     font-size: 15px;
     text-align: center;
-    width: 193px;
+    width: 300px;
     height: 44px;
     margin-top: 182px;
     margin-bottom: 20px;
@@ -21,7 +21,7 @@ const UnicornText = styled.span`
     font-family: 'NanumSquare Regular';
     font-size: 12px;
     position: absolute;
-    width: 216px;
+    width: 300px;
     height: 36px;
     bottom: 57px;
   }
