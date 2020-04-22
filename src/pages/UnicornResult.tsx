@@ -271,7 +271,7 @@ function UnicornResult(props: RouteChildrenProps) {
     const { history } = props;
     history.push({
       pathname: '/team_sub',
-      // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
   }
 
@@ -279,7 +279,7 @@ function UnicornResult(props: RouteChildrenProps) {
     const { history } = props;
     history.push({
       pathname: '/user_sub',
-      // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
   }
 
