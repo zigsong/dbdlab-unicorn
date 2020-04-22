@@ -132,9 +132,9 @@ const RadioGroup = styled.div`
 `
 
 const UnicornText = styled.div`
-  width: 90%;
+  width: 100%;
   margin-top: 32px;
-  margin-left: 10%;
+  padding-left: 33px;
   
   p {
     font-family: 'NanumSquare Bold';

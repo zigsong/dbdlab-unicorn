@@ -49,7 +49,7 @@ function UnicornHome(props: RouteChildrenProps) {
 
   return (
     <UnicornLayout>
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1 }}>
           <UnicornText className="label">결과를 분석중입니다.<br />과연 우리는 어떤 유니콘일까요?</UnicornText>
           <div><img src={WhonicornLogo1} alt="greycorn" width="197px" height="47px" /></div>

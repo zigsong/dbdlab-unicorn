@@ -171,9 +171,10 @@ function Survey(props: RouteChildrenProps) {
           </UnicornRadio>
         ))}
       </div>
-      <div style={{ textAlign: "center", "width": "100%", "margin": "10px auto 55px"}}>
+      <div style={{ textAlign: "center", "width": "100%", "margin": "10px auto", "padding": "50px 0 100px"}}>
         <UnicornButton onClick={goResult} disabled={progressRate !== 100}>검사 결과 보기</UnicornButton>
-      </div>  
+      </div>
+      <div></div>
     </UnicornLayout>
   )
 }

@@ -97,7 +97,7 @@ function UnicornHome(props: RouteChildrenProps) {
 
   return (
     <UnicornLayout>
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1 }}>
           <UnicornText className="label">검사하고 싶은<br />제품/서비스명을 입력해주세요.</UnicornText>
           <UnicornInput onChange={onChange} maxLength={20} onKeyPress={handleEnter} />
