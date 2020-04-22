@@ -77,8 +77,8 @@ function UnicornHome(props: RouteChildrenProps) {
   */
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
     if(e.key === "Enter"){
+      e.preventDefault();
       onNext();
     }
   }
