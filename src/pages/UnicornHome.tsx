@@ -103,7 +103,7 @@ const UnicornStartBtn = styled(Button)`
   }
 `
 const UnicornScroll = styled.div`
-  margin-top: 104px;
+  margin-top: 21px;
   display: inline-block;
 
   span {
@@ -208,8 +208,8 @@ function UnicornHome(props: RouteChildrenProps) {
             이용하는 모든 과정에서 느낀 것, 본 것,<br /> 
             행동한 것을 종합한 결과죠.<br />
             <br />
-            "우리가 이 결과를 분류할 수 있지 않을까?"<br />
-            라는 질문에서 Whonicorn은 시작되었습니다. <br />
+            "우리가 이 결과를 분류할 수 있을까?"<br />
+            라는 질문에서 후니콘은 시작되었습니다. <br />
             <br />
             유니콘은 사용자가 제품/서비스를<br /> 
             인식하는 유형(즐거움/유용함)과<br />

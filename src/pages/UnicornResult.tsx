@@ -89,9 +89,10 @@ const ShareMenu = styled.div`
   bottom: 0;
   width: 100%;
   height: 80px;
+  padding: 0 33px;
   display:flex;
   flex-direction: row;
-  margin-top: 60px;
+  margin-top: 50px;
 `
 const FeedbackIcon = styled.img`
   width: 46px;
@@ -337,7 +338,7 @@ function UnicornResult(props: RouteChildrenProps) {
         <div style={{ width: "100%", position: "relative" }}>
           <ResultBg src={resultBg} alt="result-bg" />
         </div>
-        <UnicornTextBold style={{ color: '#646464', fontSize: '17px', marginTop: '186px', marginBottom: '3px' }}>
+        <UnicornTextBold style={{ color: '#646464', fontSize: '17px', marginTop: '86px', marginBottom: '3px' }}>
           [{serviceName}] 의 유니콘은..
         </UnicornTextBold>
         <UnicornTextBold style={{ color: '#7986cb', fontSize: '36px', marginBottom: '22px' }}>
@@ -348,7 +349,7 @@ function UnicornResult(props: RouteChildrenProps) {
           #디비디랩_유니콘테스트 #후니콘
         </UnicornHashTag>
         <ShareMenu>
-          <UnicornTextBold style={{ flex: 1, color: '#4a4a4a', fontSize: '10px', marginTop: '14px', marginLeft: '21px' }}>
+          <UnicornTextBold style={{ flex: 1, color: '#4a4a4a', fontSize: '10px', marginTop: '14px' }}>
             다른 사람들과 공유해보세요!
           </UnicornTextBold>
           <ShareButton type="button" onClick={onShareFacebook}>
@@ -357,9 +358,6 @@ function UnicornResult(props: RouteChildrenProps) {
           <ShareButton type="button" onClick={onShareKakao}>
             <img src={kakao_icon} alt="kakao" />
           </ShareButton >
-          <ShareButton type="button" onClick={onShareSlack}>
-            <img src={slack_icon} alt="slack"/>
-          </ShareButton>
           <ShareButton type="button" onClick={onShareLink}>
             <img src={link_icon} alt="link" />
           </ShareButton>
@@ -379,10 +377,10 @@ function UnicornResult(props: RouteChildrenProps) {
         <UnicornTextRegular style={{ color: '#7986cb', fontSize: '14px', marginBottom: '11px', whiteSpace: 'pre-line' }}>
           {unicorn.title + "의 대표님은" }
         </UnicornTextRegular>
-        <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '42px', whiteSpace: 'pre-line' }}>
-          {unicorn.guess1}<br />
-          {unicorn.guess2}<br />
-          {unicorn.guess3}
+        <UnicornTextRegular style={{ color: '#4a4a4a', fontSize: '13px', marginBottom: '42px', whiteSpace: 'pre-line', fontFamily: 'NanumSquare Bold' }}>
+          - {unicorn.guess1}<br />
+          - {unicorn.guess2}<br />
+          - {unicorn.guess3}
         </UnicornTextRegular>
       </div>
 
@@ -433,7 +431,9 @@ function UnicornResult(props: RouteChildrenProps) {
         
         <div style={{ display: 'flex', flexDirection: 'row', marginTop: '36px'}}>
           <p style={{ color: '#282828', fontSize: '14px', fontFamily: 'NanumSquare Extra Bold' }}>Check List</p>
-          <p style={{ color: '#9b9b9b', fontSize: '10px', marginLeft: '7px', marginTop: '5px' }}>사용자의, 사용자에 의한, 사용자를 위한 ‘관리 지표’</p>
+          <p style={{ color: '#9b9b9b', fontSize: '10px', marginLeft: '7px', marginTop: '5px' }}>
+            { `${unicorn.title}이 주로 신경쓰는 지표`  }
+          </p>
         </div>
         <DottedLine style={{ marginBottom: '15px' }}></DottedLine>
         <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '24px' }}>
@@ -444,7 +444,7 @@ function UnicornResult(props: RouteChildrenProps) {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '15px', marginBottom: '2px' }}>whonicorn 결과는 어떠셨나요?</UnicornTextBold>
+          <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '15px', marginBottom: '2px' }}>후니콘 결과는 어떠셨나요?</UnicornTextBold>
           <UnicornTextRegular style={{ color: '#9b9b9b', fontSize: '10px', marginBottom: '22px' }}>중복 투표 가능해요 :)</UnicornTextRegular>
           <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '49px', width: '282px' }}>
             <FeedbackWrapper>

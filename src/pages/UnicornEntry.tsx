@@ -17,13 +17,18 @@ const UnicornText = styled.span`
     margin-top: 182px;
     margin-bottom: 20px;
   }
-  &.guide {
+`
+
+const UnicornGuide = styled.div`
+  position: absolute;
+  bottom: 57px;
+
+  span {
+    display: inline-block;
+    text-align: left;
+    color: black;
     font-family: 'NanumSquare Regular';
     font-size: 12px;
-    position: absolute;
-    width: 300px;
-    height: 36px;
-    bottom: 57px;
   }
 `
 
@@ -92,7 +97,7 @@ function UnicornHome(props: RouteChildrenProps) {
     history.push({
       pathname: '/survey',
       search: "?" + new URLSearchParams({
-        sn: btoa(encodeURIComponent(serviceName ? serviceName : "Whonicorn"))
+        sn: btoa(encodeURIComponent(serviceName ? serviceName : "후니콘"))
       }).toString()
     })
   }
@@ -107,10 +112,13 @@ function UnicornHome(props: RouteChildrenProps) {
         </div>
         <div style={{ flex: 1, width: '100%', position: 'relative', zIndex: 0 }}>
           <GreyCorn src={greycorn} alt="greycorn" />
-          <UnicornText className="guide" style={{ width: '100%', textAlign: 'center' }}>
-            ※ 검사는 총 14문항 입니다. (약 5분 소요)<br />
-            ※ 가능하면 답변 시 ‘중립’을 피해주세요.
-          </UnicornText>
+
+          <UnicornGuide style={{ width: '100%', textAlign: 'center'}}>
+            <UnicornText>
+              ※ 검사는 총 14문항 입니다. (약 5분 소요)<br />
+              ※ 가능하면 답변 시 ‘중립’을 피해주세요.
+            </UnicornText>
+          </UnicornGuide>
         </div>
       </div>
     </UnicornLayout>

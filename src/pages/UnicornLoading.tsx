@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { Button, Input } from "antd"
 import UnicornLayout from '../layouts/UnicornLayout';
 import greycorn from "../assets/img_loading_bg.png";
-import WhonicornLogo1 from "../assets/img_loading1.png";
-import WhonicornLogo2 from "../assets/img_loading2.png";
+import WhonicornLogo1 from "../assets/loading.gif";
 
 const UnicornText = styled.span`
   &.label {
@@ -48,7 +47,7 @@ function UnicornHome(props: RouteChildrenProps) {
         ua: btoa(encodeURIComponent(userAnswer))
       }).toString()
     })
-  }, 3000)
+  }, 4000)
 
   return (
     <UnicornLayout>
@@ -56,7 +55,6 @@ function UnicornHome(props: RouteChildrenProps) {
         <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1 }}>
           <UnicornText className="label">결과를 분석중입니다.<br />과연 우리는 어떤 유니콘일까요?</UnicornText>
           <div><img src={WhonicornLogo1} alt="greycorn" width="197px" height="47px" /></div>
-          <div><img src={WhonicornLogo2} alt="greycorn" width="197px" height="47px" /></div>
         </div>
         <div style={{ flex: 1, width: '100%', position: 'relative', zIndex: 0 }}>
           <GreyCorn src={greycorn} alt="greycorn" />

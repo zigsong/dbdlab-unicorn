@@ -13,22 +13,20 @@ const StyledDiv = styled.div`
   flex-direction: column;
 
   .Caption1, .Caption2 {
-    width: 35%;
     font-family: 'NanumSquare Bold';
     font-size: 10px;
-    position: absolute;
-    bottom: 5px;
   }
   .Caption1 {
+    color: #7986cb;
     text-align: left;
-    left: 33px;
   }
 
   .Caption2 {
+    color: #ba68c8;
     text-align: right;
-    right: 33px;
   }
 `
+
 
 // const StyledRadioGroup = styled(Radio.Group)`
 // height: 100px !important;
@@ -40,21 +38,20 @@ const StyledDiv = styled.div`
 //   }     
 // `
 
-const Caption = styled.div`
+const Caption = styled.p`
+  max-width: 40%;
   font-size: 10px;
-  text-align: center;
-  position: absolute;
-  margin-top: 5px
+  margin-bottom: 0;
 `
 
 const RadioGroup = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 
-  width: 80%;
+  width: 100%;
   height: 30px;
-  margin-top: 0px;
+  margin: 18px 0 0;
 
   .option {
     width: 44px;
@@ -133,8 +130,6 @@ const RadioGroup = styled.div`
 
 const UnicornText = styled.div`
   width: 100%;
-  margin-top: 32px;
-  padding-left: 33px;
   
   p {
     font-family: 'NanumSquare Bold';
@@ -170,11 +165,15 @@ function UnicornRadio(props: StyledRadioProps) {
 
   return (
     <StyledDiv style={{ marginBottom: '30px' }}>
-      <UnicornText>{props.children}</UnicornText>
-      <div style={{ width: "100%", position: "relative", "height": "50px"}}>
+      
+      <UnicornText style={{ padding: '32px 12px 0' }}>{props.children}</UnicornText>
+
+      <div style={{ width: "100%", display: 'flex', flexDirection: 'row', padding: '24px 12px 0' }}>
         <Caption className="Caption1">{ props.data.answers[0] }</Caption>
+        <div style={{ flex: 1 }}></div>
         <Caption className="Caption2">{ props.data.answers[1] }</Caption>
       </div>
+
       <RadioGroup>
         <div className={"option"}  onClick={() => setChecked("A")}>
           {checked === "A"  ? (<img src={WhonicornLeft} alt="left" width="34px" height="34px" style={{ margin: "5px" }}/>)
