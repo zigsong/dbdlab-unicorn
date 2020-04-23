@@ -42,6 +42,8 @@ import feedback5_on from "../assets/btn_feedback5_on.png";
 
 import banner_sub1 from "../assets/whonicorn_bn_sub_img-10.png";
 import banner_sub2 from "../assets/whonicorn_bn_sub_img-11.png";
+import img_checklist from "../assets/img_checklist.png";
+import img_check from "../assets/path-2.svg";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -50,6 +52,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import UnicornLayout from '../layouts/UnicornLayout';
 
 import _ from "lodash";
+
   
 const ResultBg = styled.img`
   position: absolute;
@@ -100,11 +103,12 @@ const FeedbackIcon = styled.img`
   margin-bottom: 5px;
 `
 const UnicornButton = styled(Button)`
-width: 270px;
+  width: 270px;
   height: 54px;
   display: inline-block;
   position: relative;
   background-color: #7986cb;
+  font-size: 16px;
   font-family: 'NanumSquare Bold';
   color: #ffffff;
   
@@ -231,7 +235,8 @@ const statHeaders = [
 
 function UnicornResult(props: RouteChildrenProps) {
   const [isLoaded, setIsLoaded] = useState(true);
-  const [feedbackOption, setFeedbackOption] = useState("0");
+  const [feedbackOption, setFeedbackOption] = useState([false, false, false, false, false]);
+
   const location = useLocation();
   const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
   const userAnswer = decodeURIComponent(atob(new URLSearchParams(location.search).get("ua") ?? ""));
@@ -323,15 +328,12 @@ function UnicornResult(props: RouteChildrenProps) {
     }
   }, []);
 
-  const selectFeedback = (choice: string) => {
-    if (feedbackOption === choice) {
-      setFeedbackOption("0");
-    } else {
-      setFeedbackOption(choice);
-    }
+  const selectFeedback = (choice: number) => {
+    const newFeedBackOption = [...feedbackOption];
+    newFeedBackOption[choice] = !newFeedBackOption[choice];
+    setFeedbackOption(newFeedBackOption);
   }
   
-
   return (
     <UnicornLayout>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -385,7 +387,6 @@ function UnicornResult(props: RouteChildrenProps) {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '33px', marginRight: '33px' }}>
-
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <p style={{ color: '#282828', fontSize: '14px', fontFamily: 'NanumSquare Extra Bold' }}>Stats</p>
           <p style={{ color: '#9b9b9b', fontSize: '10px', marginLeft: '7px', marginTop: '5px' }}>우리는 이정도다 덤벼라</p>
@@ -438,45 +439,76 @@ function UnicornResult(props: RouteChildrenProps) {
         <DottedLine style={{ marginBottom: '15px' }}></DottedLine>
         <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '24px' }}>
           {unicorn.checkpoints.map((checkpoint, i) => (
-            <div style={{ flex: 1, maxWidth: "33%" }}>{ checkpoint }</div>
+            <div style={{
+              width: '81px',
+              height: '81px',
+              padding: '8px',
+              marginRight: '8px',
+              textAlign: 'center',
+              fontFamily: 'NanumSquare Bold',
+              fontSize: '10px',
+              background: '#f8f8f8'
+            }}>
+              <div style={{ width: '11px', height: '11px', background: '#dcdcdc', border: '1px solid #cacaca'}}>
+                <img src={img_check} width={12} height={9} alt="checklist" style={{ marginTop: "-9px" }}/>
+              </div>
+              <div style={{ margin: '-4px 0 7px' }}>
+                <img src={img_checklist} width={30} height={35} alt="checklist" />
+              </div>
+              { checkpoint }
+            </div>
           ))}
         </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '15px', marginBottom: '2px' }}>후니콘 결과는 어떠셨나요?</UnicornTextBold>
-          <UnicornTextRegular style={{ color: '#9b9b9b', fontSize: '10px', marginBottom: '22px' }}>중복 투표 가능해요 :)</UnicornTextRegular>
-          <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '49px', width: '282px' }}>
-            <FeedbackWrapper>
-              <UnicornToast color={'#ba68c8'} active={feedbackOption === "1" ? true : false }>힝</UnicornToast>
-              <FeedbackIcon src={feedbackOption === "1" ? feedback1_on : feedback1_off } onClick={() => selectFeedback("1")}></FeedbackIcon>
-              <UnicornTextBold className="feedback">어려워요</UnicornTextBold>
-            </FeedbackWrapper>
-            <FeedbackWrapper>
-              <UnicornToast color={'#69abb9'} active={feedbackOption === "2" ? true : false }>음</UnicornToast>
-              <FeedbackIcon src={feedbackOption === "2" ? feedback2_on : feedback2_off } onClick={() => selectFeedback("2")}></FeedbackIcon>
-              <UnicornTextBold className="feedback">공감해요</UnicornTextBold>
-            </FeedbackWrapper>
-            <FeedbackWrapper>
-              <UnicornToast color={'#7fce77'} active={feedbackOption === "3" ? true : false }>꺄</UnicornToast>
-              <FeedbackIcon src={feedbackOption === "3" ? feedback3_on : feedback3_off } onClick={() => selectFeedback("3")}></FeedbackIcon>
-              <UnicornTextBold className="feedback">좋아요</UnicornTextBold>
-            </FeedbackWrapper>
-            <FeedbackWrapper>
-              <UnicornToast color={'#6aa9e5'} active={feedbackOption === "4" ? true : false }>헿</UnicornToast>
-              <FeedbackIcon src={feedbackOption === "4" ? feedback4_on : feedback4_off } onClick={() => selectFeedback("4")}></FeedbackIcon>
-              <UnicornTextBold className="feedback">재밌어요</UnicornTextBold>
-            </FeedbackWrapper>
-            <FeedbackWrapper>
-              <UnicornToast color={'#f06292'} active={feedbackOption === "5" ? true : false }>끙</UnicornToast>
-              <FeedbackIcon src={feedbackOption === "5" ? feedback5_on : feedback5_off } onClick={() => selectFeedback("5")}></FeedbackIcon>
-              <UnicornTextBold className="feedback">안 맞아요</UnicornTextBold>
-            </FeedbackWrapper>
-          </div>
-          <UnicornButton style={{ marginBottom: '93px' }} onClick={goEntry}>다시 해볼래요!</UnicornButton>
-          <BannerImg src={banner_sub1} onClick={goTeamSub} />
-          <BannerImg src={banner_sub2} onClick={goUserSub} />
+        <ShareMenu style={{ marginTop: "15px" }}>
+          <UnicornTextBold style={{ flex: 1, color: '#4a4a4a', fontSize: '10px', marginTop: '14px' }}>
+            우리 팀도 같은 유니콘이 나올까?
+          </UnicornTextBold>
+          <ShareButton type="button" onClick={onShareFacebook}>
+            <img src={facebook_icon} alt="facebook" />
+          </ShareButton>
+          <ShareButton type="button" onClick={onShareKakao}>
+            <img src={kakao_icon} alt="kakao" />
+          </ShareButton >
+          <ShareButton type="button" onClick={onShareLink}>
+            <img src={link_icon} alt="link" />
+          </ShareButton>
+        </ShareMenu>
 
+        <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '15px', marginBottom: '2px', marginTop: '40px' }}>후니콘 결과는 어떠셨나요?</UnicornTextBold>
+        <UnicornTextRegular style={{ color: '#9b9b9b', fontSize: '10px', marginBottom: '22px' }}>중복 투표 가능해요 :)</UnicornTextRegular>
+        <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '49px', width: '282px' }}>
+          <FeedbackWrapper>
+            <UnicornToast color={'#ba68c8'} active={feedbackOption[0]}>힝</UnicornToast>
+            <FeedbackIcon src={feedbackOption[0] ? feedback1_on : feedback1_off } onClick={() => selectFeedback(0)}></FeedbackIcon>
+            <UnicornTextBold className="feedback">어려워요</UnicornTextBold>
+          </FeedbackWrapper>
+          <FeedbackWrapper>
+            <UnicornToast color={'#69abb9'} active={feedbackOption[1]}>음</UnicornToast>
+            <FeedbackIcon src={feedbackOption[1] ? feedback2_on : feedback2_off } onClick={() => selectFeedback(1)}></FeedbackIcon>
+            <UnicornTextBold className="feedback">공감해요</UnicornTextBold>
+          </FeedbackWrapper>
+          <FeedbackWrapper>
+            <UnicornToast color={'#7fce77'} active={feedbackOption[2] }>꺄</UnicornToast>
+            <FeedbackIcon src={feedbackOption[2] ? feedback3_on : feedback3_off } onClick={() => selectFeedback(2)}></FeedbackIcon>
+            <UnicornTextBold className="feedback">좋아요</UnicornTextBold>
+          </FeedbackWrapper>
+          <FeedbackWrapper>
+            <UnicornToast color={'#6aa9e5'} active={feedbackOption[3]}>헿</UnicornToast>
+            <FeedbackIcon src={feedbackOption[3] ? feedback4_on : feedback4_off } onClick={() => selectFeedback(3)}></FeedbackIcon>
+            <UnicornTextBold className="feedback">재밌어요</UnicornTextBold>
+          </FeedbackWrapper>
+          <FeedbackWrapper>
+            <UnicornToast color={'#f06292'} active={feedbackOption[4]}>끙</UnicornToast>
+            <FeedbackIcon src={feedbackOption[4] ? feedback5_on : feedback5_off } onClick={() => selectFeedback(4)}></FeedbackIcon>
+            <UnicornTextBold className="feedback">안 맞아요</UnicornTextBold>
+          </FeedbackWrapper>
+        </div>
+        <UnicornButton style={{ marginBottom: '93px' }} onClick={goEntry}>다시 해볼래요!</UnicornButton>
+        <BannerImg src={banner_sub1} onClick={goTeamSub} />
+        <BannerImg src={banner_sub2} onClick={goUserSub} />
       </div>
     </UnicornLayout>
   );
