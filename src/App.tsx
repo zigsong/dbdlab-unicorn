@@ -18,6 +18,7 @@ function App() {
       <BrowserRouter>
         <Router history={history}>
           <Route exact path="/" component={UnicornHome}/>
+          <Route path="/home/:unicornName" component={UnicornHome}/>
           <Route path="/service" component={UnicornEntry} />
           <Route path="/test" component={UnicornSurvey}/>
           <Route path="/test_loading" component={UnicornLoading}/>
