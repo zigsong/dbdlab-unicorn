@@ -109,6 +109,26 @@ const FooterWrapper = styled.div`
     padding-bottom: 31px;
 `
 
+const hasJong = (s: string) => {
+    const str: number = s.charCodeAt(s.length - 1);
+    return (str - 0xac00) % 28 > 0;
+}  
+
+const getJosa = (name: string | null, type: string) => {
+    // 은/는
+    // 을/를
+    // 이/가
+    // 과/와
+    if (!name) {
+      return type
+    }
+    if (hasJong(name)) {
+      return type.split('/')[0]
+    } else { 
+      return type.split('/')[1]
+    }
+}
+
 function UnicornSub_1(props: RouteChildrenProps) {
 
     const location = useLocation();
@@ -141,7 +161,7 @@ function UnicornSub_1(props: RouteChildrenProps) {
                 <UnicornTextBold style={{ fontSize: "16px", color: "#2d2d2d", }}>후니콘 테스트는 재밌으셨나요?</UnicornTextBold>
                 <UnicornTextRegular style={{ fontSize: "14px", color: "#3b3b3b",  marginTop: '10px' }}>
                     <p>
-                    후니콘으로 [{serviceName}]을<br />
+                    후니콘으로 [{serviceName}]{getJosa(serviceName, '을/를')}<br />
                     당신이 어떻게 생각하는지를 파악해 보았습니다.<br />
                     그럼 이제 우리 팀원들은 어떻게 생각하고 있는지<br />
                     더 자세히 알아볼 차례죠!<br />
@@ -201,7 +221,7 @@ function UnicornSub_1(props: RouteChildrenProps) {
                 <BlackBubble>
                     <UnicornTextBold style={{ textAlign: "left", lineHeight: "19px" }}>
                         아래 신청서를 작성해주시면,<br />
-                        [{serviceName}]을 위한<br />
+                        [{serviceName}]{getJosa(serviceName, '을/를')} 위한<br />
                         일치율 체크 폼을 보내드립니다.
                     </UnicornTextBold>
                 </BlackBubble>
