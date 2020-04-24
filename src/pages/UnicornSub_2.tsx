@@ -81,26 +81,62 @@ const UnicornTextExtraBold = styled.div`
         color: #282828;
     }
 `
+
 const YellowBubble = styled.div`
     display: inline-block;
+	position: relative;
     height: 36px;
+    font-size: 14px;
+    line-height: 16px;
     background-color: #ffe502;
-    border-radius: 1px;
+    border-radius: 3px;
     text-align: center;
     z-index: 10;
-    float: right;
     padding: 10px;
-    margin-bottom: 18px;
+    margin-top: 15px;
+    
+    &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10px;
+        width: 0;
+        height: 0;
+        border: 9px solid transparent;
+        border-left-color: #ffe502;
+        border-right: 0;
+        border-top: 0;
+        margin-top: -3px;
+        margin-right: -9px;
+    }
 `
 
 const BlackBubble = styled.div`
     display: inline-block;
+	position: relative;
+    font-size: 14px;
+    line-height: 16px;
     background-color: #282828;
     color: #ffffff;
-    border-radius: 1px;
+    border-radius: 3px;
     text-align: center;
     padding: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 27px;
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 0;
+        height: 0;
+        border: 9px solid transparent;
+        border-right-color: #282828;
+        border-left: 0;
+        border-top: 0;
+        margin-top: -3px;
+        margin-left: -9px;
+    }
 `
 
 const TypeWrapper = styled.div`
@@ -150,9 +186,12 @@ const FooterWrapper = styled.div`
 `
 
 function UnicornSub_2(props: RouteChildrenProps) {
-
     const location = useLocation();
-    const serviceName = new URLSearchParams(location.search).get("serviceName");
+    const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     const goBack = () => {
         const { history } = props;
@@ -175,11 +214,11 @@ function UnicornSub_2(props: RouteChildrenProps) {
             </TopImgWrapper>
             <div style={{ margin: "31px 18px 57px 17px" }} >
                 <UnicornTextBold style={{ fontSize: "16px", color: "#2d2d2d", }}>후니콘 테스트는 재밌으셨나요?</UnicornTextBold>
-                <UnicornTextRegular style={{ fontSize: "14px", color: "#3b3b3b" }}>
+                <UnicornTextRegular style={{ fontSize: "14px", color: "#3b3b3b", marginTop: '10px' }}>
                     <p>
-                    후니콘으로 [{serviceName}]을
-                    당신이 어떻게 생각하는지를 파악해 보았습니다.
-                    그럼 이제 우리 사용자들은 어떻게 생각하고 있는지
+                    후니콘으로 [{serviceName}]을<br />
+                    당신이 어떻게 생각하는지를 파악해 보았습니다.<br />
+                    그럼 이제 우리 사용자들은 어떻게 생각하고 있는지<br />
                     더 자세히 알아볼 차례죠!
                     </p>
                 </UnicornTextRegular>
@@ -195,10 +234,13 @@ function UnicornSub_2(props: RouteChildrenProps) {
             </div>
 
             <div style={{ marginLeft: "17px", marginRight: "17px" }}>
-                <img src={eyes_img} width="58px" height="auto" style={{ display: "block", margin: "0 auto 0 auto" }} />
-                <YellowBubble>
-                    <UnicornTextBold style={{ fontSize: "14px", color: "#3b3b3b" }}>Q.무엇을 할 수 있나요?</UnicornTextBold>
-                </YellowBubble>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ flex: 1}}></div>
+                    <img src={eyes_img} width="72px" height="66px" style={{ display: "block", marginRight: "-18px", marginBottom: "15px" }} />
+                    <YellowBubble>
+                        <UnicornTextBold style={{ fontSize: "14px", color: "#3b3b3b" }}>Q.무엇을 할 수 있나요?</UnicornTextBold>
+                    </YellowBubble>
+                </div>
                 <BlackBubble>
                     <UnicornTextBold>1. 어떤 리서치를 할까?</UnicornTextBold>
                 </BlackBubble>
@@ -235,7 +277,7 @@ function UnicornSub_2(props: RouteChildrenProps) {
                 <BlackBubble style={{ marginBottom: "37px" }}>
                     <UnicornTextBold>3. 어떻게 할까?</UnicornTextBold>
                 </BlackBubble>
-                <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "28px" }}>
+                <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px", marginBottom: "28px" }}>
                     <MethodWrapper>
                         <MethodImage src={method_one} alt="method-one" />
                         <UnicornTextBold className="method-number">01.</UnicornTextBold>
@@ -271,13 +313,13 @@ function UnicornSub_2(props: RouteChildrenProps) {
             </FooterWrapper>
 
             <div style={{ marginLeft: "17px", marginRight: "17px" }}>
-                <YellowBubble>
+                <YellowBubble style={{ float: "right", marginTop: '0px', marginBottom: '18px' }}>
                     <UnicornTextBold style={{ fontSize: "14px", color: "#3b3b3b" }}>
-                        Q.어떻게 하면 되나요?<span style={{ textDecoration: "line-through" }}>얼른 내놔!!</span>
+                        Q.어떻게 하면 되나요?&nbsp;<span style={{ fontFamily: 'NanumSquare Extra Regular', textDecoration: "line-through" }}>얼른 내놔!!</span>
                     </UnicornTextBold>
                 </YellowBubble>
                 <BlackBubble>
-                    <UnicornTextBold>
+                    <UnicornTextBold style={{ textAlign: "left", lineHeight: "19px" }}>
                         아래 신청서를 작성해주시면,<br />
                         [{serviceName}]을 위한<br />
                         리서치 설계안을 보내드립니다.
@@ -286,12 +328,12 @@ function UnicornSub_2(props: RouteChildrenProps) {
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <UnicornTextBold style={{ fontSize: "16px", color: "#333333", marginBottom: "15px" }}>신청 하셨나용?</UnicornTextBold>
+                <UnicornTextBold style={{ fontSize: "16px", color: "#333333", marginBottom: "15px" }}>신청 하셨나요?</UnicornTextBold>
                 <UnicornTextRegular style={{ textAlign: "center", marginBottom: "35px" }} >
                     그럼 하루 이내로 메일드리겠습니다:)<br />
                     더 상세한 문의 사항은<br />
                     <strong>contact@dbdlab.io</strong>로 문의 주씨오.<br />
-                    <span style={{ color: "#b7b7b7", textDecoration: "line-through" }}>(안 그럼 기계는 죽소.)</span>
+                    <span style={{ fontFamily: 'NanumSquare Extra Regular', color: "#b7b7b7", textDecoration: "line-through" }}>(안 그럼 기계는 죽소.)</span>
                 </UnicornTextRegular>
                 <img src={goodbye} width="130px" height="auto" style={{ marginBottom: "43px"}} />
             </div>

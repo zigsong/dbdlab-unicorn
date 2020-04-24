@@ -43,24 +43,59 @@ const UnicornTextRegular = styled.div`
 
 const YellowBubble = styled.div`
     display: inline-block;
+	position: relative;
     height: 36px;
+    font-size: 14px;
+    line-height: 16px;
     background-color: #ffe502;
-    border-radius: 1px;
+    border-radius: 3px;
     text-align: center;
     z-index: 10;
-    float: right;
     padding: 10px;
-    margin-bottom: 18px;
+    margin-top: 15px;
+    
+    &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10px;
+        width: 0;
+        height: 0;
+        border: 9px solid transparent;
+        border-left-color: #ffe502;
+        border-right: 0;
+        border-top: 0;
+        margin-top: -3px;
+        margin-right: -9px;
+    }
 `
 
 const BlackBubble = styled.div`
     display: inline-block;
+	position: relative;
+    font-size: 14px;
+    line-height: 16px;
     background-color: #282828;
     color: #ffffff;
-    border-radius: 1px;
+    border-radius: 3px;
     text-align: center;
     padding: 10px;
     margin-bottom: 27px;
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 0;
+        height: 0;
+        border: 9px solid transparent;
+        border-right-color: #282828;
+        border-left: 0;
+        border-top: 0;
+        margin-top: -3px;
+        margin-left: -9px;
+    }
 `
 
 const FooterWrapper = styled.div`
@@ -77,8 +112,12 @@ const FooterWrapper = styled.div`
 function UnicornSub_1(props: RouteChildrenProps) {
 
     const location = useLocation();
-    const serviceName = new URLSearchParams(location.search).get("serviceName");
-
+    const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
+    
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+      
     const goBack = () => {
         const { history } = props;
         history.goBack();
@@ -100,20 +139,20 @@ function UnicornSub_1(props: RouteChildrenProps) {
             </TopImgWrapper>
             <div style={{ margin: "31px 18px 40px 17px" }} >
                 <UnicornTextBold style={{ fontSize: "16px", color: "#2d2d2d", }}>후니콘 테스트는 재밌으셨나요?</UnicornTextBold>
-                <UnicornTextRegular style={{ fontSize: "14px", color: "#3b3b3b" }}>
+                <UnicornTextRegular style={{ fontSize: "14px", color: "#3b3b3b",  marginTop: '10px' }}>
                     <p>
-                    후니콘으로 [{serviceName}]을
-                    당신이 어떻게 생각하는지를 파악해 보았습니다.
-                    그럼 이제 우리 팀원들은 어떻게 생각하고 있는지
-                    더 자세히 알아볼 차례죠!
+                    후니콘으로 [{serviceName}]을<br />
+                    당신이 어떻게 생각하는지를 파악해 보았습니다.<br />
+                    그럼 이제 우리 팀원들은 어떻게 생각하고 있는지<br />
+                    더 자세히 알아볼 차례죠!<br />
                     </p>
                     <p>
-                    팀원들과 소통중에
-                    보이지 않는 무언가가 가로막고 있다는 생각이 들거나,
-                    서로 다른 이야기를 하고 있다는 느낌을 받은적이 있나요?
-                    서로 다른 유니콘을 상상하고 있다면,
-                    크고 작은 커뮤니케이션 문제가 생기기 마련입니다.
-                    이 문제들은 엄청난 비용이죠.
+                    팀원들과 소통중에<br />
+                    보이지 않는 무언가가 가로막고 있다는 생각이 들거나,<br />
+                    서로 다른 이야기를 하고 있다는 느낌을 받은적이 있나요?<br />
+                    서로 다른 유니콘을 상상하고 있다면,<br />
+                    크고 작은 커뮤니케이션 문제가 생기기 마련입니다.<br />
+                    이 문제들은 엄청난 비용이죠.<br />
                     </p>
                     <p>
                     그래서 준비한!
@@ -131,41 +170,50 @@ function UnicornSub_1(props: RouteChildrenProps) {
             </div>
 
             <div style={{ marginLeft: "17px", marginRight: "17px" }}>
-                <img src={eyes_img} width="58px" height="auto" style={{ display: "block", margin: "0 auto 0 auto" }} />
-                <YellowBubble>
-                    <UnicornTextBold style={{ fontSize: "14px", color: "#3b3b3b" }}>Q.무엇을 볼 수 있나요?</UnicornTextBold>
-                </YellowBubble>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ flex: 1}}></div>
+                    <img src={eyes_img} width="72px" height="66px" style={{ display: "block", marginRight: "-18px", marginBottom: "15px" }} />
+                    <YellowBubble>
+                        <UnicornTextBold style={{ fontSize: "14px", color: "#3b3b3b" }}>Q.무엇을 볼 수 있나요?</UnicornTextBold>
+                    </YellowBubble>
+                </div>
                 <div style={{ position: "relative" }}>
                     <BlackBubble>
                         <UnicornTextBold>1. 우리 팀은 서비스에 대해 어떻게 생각할까요?</UnicornTextBold>
                     </BlackBubble>
                     <UnicornTextRegular className="answer">팀원들은 서비스를 어떻게 인식하고 있는지 알아보세요.</UnicornTextRegular>
                     <img src={service_table} alt="service-table" width="218px" height="auto" style={{ margin: "48px auto 61px 28px"}} />
-                    <img src={dance} alt="dance" width="92px" height="auto" style={{ position: "absolute", top: "227px", left: "209px" }}/>
-                    <img src={dance_text} alt="dance_text" style={{ position: "absolute", top: "297px", left: "259px" }}/>
+                    <img src={dance} alt="dance" width="92px" height="auto" style={{ position: "absolute", top: "177px", left: "209px" }}/>
+                    <img src={dance_text} alt="dance_text" style={{ position: "absolute", top: "252px", left: "254px" }}/>
                 </div>
                 <BlackBubble>
                     <UnicornTextBold>2. 무엇을 다르게 생각하고 있을까요?</UnicornTextBold>
                 </BlackBubble>
                 <UnicornTextRegular className="answer">4가지 서비스 속성을 기준으로<br />모든 팀원의 의견을 실용적이고 빠르게 일치시키세요.</UnicornTextRegular>
                 <img src={service_graph} width="266px" height="auto" style={{ display: "block", margin: "21px auto 50px auto" }} />
-                <YellowBubble>
+
+                <YellowBubble style={{ float: "right", marginTop: '0px', marginBottom: '18px' }}>
                     <UnicornTextBold style={{ fontSize: "14px", color: "#3b3b3b" }}>
-                        Q.어떻게 하면 되나요?<span style={{ textDecoration: "line-through" }}>얼른 내놔!!</span>
+                        Q.어떻게 하면 되나요?&nbsp;<span style={{ fontFamily: 'NanumSquare Extra Regular', textDecoration: "line-through" }}>얼른 내놔!!</span>
                     </UnicornTextBold>
                 </YellowBubble>
+
                 <BlackBubble>
-                    <UnicornTextBold>아래 신청서를 작성해주시면,<br />[{serviceName}]을 위한<br />일치율 체크 폼을 보내드립니다.</UnicornTextBold>
+                    <UnicornTextBold style={{ textAlign: "left", lineHeight: "19px" }}>
+                        아래 신청서를 작성해주시면,<br />
+                        [{serviceName}]을 위한<br />
+                        일치율 체크 폼을 보내드립니다.
+                    </UnicornTextBold>
                 </BlackBubble>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <UnicornTextBold style={{ fontSize: "16px", color: "#333333", marginBottom: "15px" }}>신청 하셨나용?</UnicornTextBold>
+                <UnicornTextBold style={{ fontSize: "16px", color: "#333333", marginBottom: "15px" }}>신청 하셨나요?</UnicornTextBold>
                 <UnicornTextRegular style={{ textAlign: "center", marginBottom: "35px" }} >
                     그럼 하루 이내로 메일드리겠습니다:)<br />
                     더 상세한 문의 사항은<br />
-                    <strong>contact@dbdlab.io</strong>로 문의 주씨오.<br />
-                    <span style={{ color: "#b7b7b7", textDecoration: "line-through" }}>(안 그럼 기계는 죽소.)</span>
+                    <span style={{ fontFamily: 'NanumSquare Extra Bold' }}>contact@dbdlab.io</span>로 문의 주씨오.<br />
+                    <span style={{ fontFamily: 'NanumSquare Extra Regular', color: "#b7b7b7", textDecoration: "line-through" }}>(안 그럼 기계는 죽소.)</span>
                 </UnicornTextRegular>
                 <img src={wink} width="186px" height="auto" style={{ marginBottom: "43px"}} />
             </div>

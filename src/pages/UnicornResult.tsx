@@ -15,7 +15,7 @@ import UnicornTransparent from "../texts/UnicornTransparent";
 import resultBg from "../assets/img_result_bg.png";
 import facebook_icon from "../assets/group-9.svg";
 import kakao_icon from "../assets/group-7.svg";
-import link_icon from "../assets/group-5.svg";
+import link_icon from "../assets/group-link.svg";
 
 import whonicorn_1 from "../assets/img_whonicorn1.png";
 import whonicorn_2 from "../assets/img_whonicorn2.png";
@@ -143,6 +143,7 @@ const UnicornHashTag = styled(UnicornTextRegular)`
 const BannerImg = styled.img`
   width: 100%;
   height: auto;
+  cursor: pointer;
 `
 
 const ShareButton = styled.button`
@@ -270,16 +271,20 @@ function UnicornResult(props: RouteChildrenProps) {
   const goTeamSub = () => {
     const { history } = props;
     history.push({
-      pathname: '/team_sub',
-      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+      pathname: '/qgs',
+      search: "?" + new URLSearchParams({
+        sn: btoa(encodeURIComponent(serviceName ? serviceName : "후니콘"))
+      }).toString()
     })
   }
 
   const goUserSub = () => {
     const { history } = props;
     history.push({
-      pathname: '/user_sub',
-      search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
+      pathname: '/research',
+      search: "?" + new URLSearchParams({
+        sn: btoa(encodeURIComponent(serviceName ? serviceName : "후니콘"))
+      }).toString()
     })
   }
 
