@@ -12,6 +12,11 @@ const StyledDiv = styled.div`
   justify-content: center;
   flex-direction: column;
 
+  p {
+    line-height: 14px;
+    margin-bottom: 0px;
+  }
+
   .Caption1, .Caption2 {
     font-family: 'NanumSquare Bold';
     font-size: 10px;
@@ -169,9 +174,9 @@ function UnicornRadio(props: StyledRadioProps) {
       <UnicornText style={{ padding: '32px 12px 0' }}>{props.children}</UnicornText>
 
       <div style={{ width: "100%", display: 'flex', flexDirection: 'row', padding: '24px 12px 0' }}>
-        <Caption className="Caption1">{ props.data.answers[0] }</Caption>
+        <Caption className="Caption1">{ props.data.answers[0].split('\n').map((item, i) => <p key={`ans_1_${i}`}>{item}</p>) }</Caption>
         <div style={{ flex: 1 }}></div>
-        <Caption className="Caption2">{ props.data.answers[1] }</Caption>
+        <Caption className="Caption2">{ props.data.answers[1].split('\n').map((item, i) => <p key={`ans_2_${i}`}>{item}</p>) }</Caption>
       </div>
 
       <RadioGroup>

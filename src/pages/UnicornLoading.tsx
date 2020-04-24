@@ -32,6 +32,15 @@ const GreyCorn = styled.img`
   bottom: 0px;
 `
 
+function generateUID() {
+  // I generate the UID from two parts here 
+  // to ensure the random number provide enough bits.
+  const firstPart = (Math.random() * 46656) | 0;
+  const secondPart = (Math.random() * 46656) | 0;
+  return ("000" + firstPart.toString(36)).slice(-3) + ("000" + secondPart.toString(36)).slice(-3)
+}
+
+
 function UnicornHome(props: RouteChildrenProps) {
   const location = useLocation();
   const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
@@ -43,7 +52,8 @@ function UnicornHome(props: RouteChildrenProps) {
       pathname: '/test_result',
       search: "?" + new URLSearchParams({
         sn: btoa(encodeURIComponent(serviceName)),
-        ua: btoa(encodeURIComponent(userAnswer))
+        ua: btoa(encodeURIComponent(userAnswer)),
+        uq: generateUID()
       }).toString()
     })
   }, 4000)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withRouter, RouteChildrenProps } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -163,8 +163,11 @@ function UnicornHome(props: RouteChildrenProps) {
     const { history } = props;
     history.push("/service");
   }
-  
-  
+
+  useEffect(() => {
+      window.scrollTo(0, 0)
+  }, [])
+
   return (
     <UnicornLayout>
       <MainSection>
