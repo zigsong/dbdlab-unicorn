@@ -40,7 +40,7 @@ function UnicornHome(props: RouteChildrenProps) {
   setTimeout(() => {
     const { history } = props;
     history.push({
-      pathname: '/result',
+      pathname: '/test_result',
       search: "?" + new URLSearchParams({
         sn: btoa(encodeURIComponent(serviceName)),
         ua: btoa(encodeURIComponent(userAnswer))

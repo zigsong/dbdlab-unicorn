@@ -152,7 +152,7 @@ function Survey(props: RouteChildrenProps) {
     const userAnswer = answered.join("") ?? "AAAAAAAAAA"
 
     history.push({
-      pathname: '/loading',
+      pathname: '/test_loading',
       search: "?" + new URLSearchParams({
         sn: btoa(encodeURIComponent(serviceName ?? "후니콘")),
         ua: btoa(encodeURIComponent(userAnswer))

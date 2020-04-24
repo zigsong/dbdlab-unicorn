@@ -97,7 +97,7 @@ function UnicornHome(props: RouteChildrenProps) {
   const onNext = () => {
     const { history } = props;
     history.push({
-      pathname: '/survey',
+      pathname: '/test',
       search: "?" + new URLSearchParams({
         sn: btoa(encodeURIComponent(serviceName ? serviceName : "후니콘"))
       }).toString()

@@ -161,7 +161,7 @@ const RightArrow = styled.img`
 function UnicornHome(props: RouteChildrenProps) {
   const onStart = () => {
     const { history } = props;
-    history.push("/entry");
+    history.push("/service");
   }
   
   

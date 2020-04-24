@@ -262,7 +262,7 @@ function UnicornResult(props: RouteChildrenProps) {
   const goEntry = () => {
     const { history } = props;
     history.push({
-      pathname: '/entry',
+      pathname: '/service',
       // search: "?" + new URLSearchParams({ serviceName: serviceName ? serviceName : "Whonicorn" }).toString()
     })
   }

@@ -18,12 +18,12 @@ function App() {
       <BrowserRouter>
           <Router history={history}>
             <Route exact path="/" component={UnicornHome}/>
-            <Route path="/entry" component={UnicornEntry} />
-            <Route path="/survey" component={UnicornSurvey}/>
-            <Route path="/loading" component={UnicornLoading}/>
-            <Route path="/result" component={UnicornResult}/>
-            <Route path="/team_sub" component={UnicornSub_1}/>
-            <Route path="/user_sub" component={UnicornSub_2}/>
+            <Route path="/service" component={UnicornEntry} />
+            <Route path="/test" component={UnicornSurvey}/>
+            <Route path="/test_loading" component={UnicornLoading}/>
+            <Route path="/test_result" component={UnicornResult}/>
+            <Route path="/qgs" component={UnicornSub_1}/>
+            <Route path="/research" component={UnicornSub_2}/>
           </Router>
       </BrowserRouter>
   );
