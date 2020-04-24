@@ -325,7 +325,7 @@ function UnicornResult(props: RouteChildrenProps) {
   }
 
   const urls = ["wd", "ch", "cs", "st", "tr", "in", "su", "cl", "ju"];
-  const shareUrl = `https://whonicorn.dbdlab.io/${urls[unicornIndex]}.html`
+  const shareUrl = `https://whonicorn.dbdlab.io/home/${urls[unicornIndex]}.html`
 
   const onShareFacebook = () => {
     const anyWindow: any = window;
