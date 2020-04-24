@@ -12,7 +12,6 @@ import ImgUnicornBtnDeco2 from "../assets/unicorn-btn-deco2.svg";
 import ImgUnicornHomeBackground from "../assets/unicorn-bg.png";
 import ImgDownArrow from "../assets/unicorn-down-arrow.png";
 import ImgDbdLogo from "../assets/img_dbd_ci.png";
-import {Helmet} from "react-helmet";
 
 // Sections
 const MainSection = styled.div`
@@ -190,10 +189,6 @@ function UnicornHome(props: RouteChildrenProps) {
 
   return (
     <UnicornLayout>
-      {unicornIndex && !isNaN(unicornIndex) && 0 <= unicornIndex && unicornIndex <= 8 && <Helmet>
-        <meta name="og:image" content={`https://whonicorn.dbdlab.io/${unicornThumbs[unicornIndex]}`} />
-      </Helmet>}
-
       <MainSection>
         <UnicornLogo src={ImgUnicornLogo} alt="unicornLogo" />
         <UnicornTitle src={ImgUnicornTitle} alt="unicornTitle" />

@@ -51,7 +51,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import UnicornLayout from '../layouts/UnicornLayout';
 import CopyToClipboard from "react-copy-to-clipboard";
 import _ from "lodash";
-import {Helmet} from "react-helmet";
 
 const Context = React.createContext({ name: 'Default' });
 
@@ -415,11 +414,6 @@ function UnicornResult(props: RouteChildrenProps) {
   return (
     <Context.Provider value={{ name: 'Whonicorn' }}>
       {contextHolder}
-      <Helmet>
-        <meta name="og:title" content={unicorn.title}/>
-        <meta name="og:description" content={unicorn.caption1}/>
-        <meta name="og:image" content={`https://whonicorn.dbdlab.io/${unicornThumbs[unicornIndex]}`} />
-      </Helmet>
 
       <UnicornLayout>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
