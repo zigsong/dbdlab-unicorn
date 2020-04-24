@@ -392,7 +392,7 @@ function UnicornResult(props: RouteChildrenProps) {
     document.body.appendChild(script);
   
     const kakaoScript = document.createElement('script');
-    kakaoScript.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+    kakaoScript.src = "https://whonicorn.dbdlab.io/kakao.js";
     kakaoScript.async = true;
     kakaoScript.defer = true;
     kakaoScript.crossOrigin = 'anonymous';
