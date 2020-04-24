@@ -173,8 +173,8 @@ function UnicornHome(props: RouteChildrenProps) {
       <MainSection>
         <UnicornLogo src={ImgUnicornLogo} alt="unicornLogo" />
         <UnicornTitle src={ImgUnicornTitle} alt="unicornTitle" />
-        <UnicornHashTag>#
-          디비디랩_유니콘테스트 #후니콘
+        <UnicornHashTag>
+          #디비디랩_유니콘테스트 #후니콘
         </UnicornHashTag>
         <UnicornSubTitle>
           우리 제품/서비스의 사용자 경험 유형을 검사하고<br />우리가 어떤 유니콘인지 알아보세요.
