@@ -99,7 +99,7 @@ function UnicornHome(props: RouteChildrenProps) {
     history.push({
       pathname: '/test',
       search: "?" + new URLSearchParams({
-        sn: btoa(encodeURIComponent(serviceName ? serviceName : "후니콘"))
+        sn: btoa(encodeURIComponent(serviceName ? serviceName.trim() : "후니콘"))
       }).toString()
     })
   }
