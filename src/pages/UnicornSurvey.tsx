@@ -139,6 +139,10 @@ function Survey(props: RouteChildrenProps) {
   const [answered, setAnswered] = useState((new Array(questions.length)).fill(false))
   const [progressRate, setProgressRate] = useState(0);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const onAnswer = (index: number, checked: string) => {
     if (answered[index] === checked) return;
     const newAnswered = [...answered]

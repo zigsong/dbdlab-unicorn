@@ -63,7 +63,7 @@ function UnicornHome(props: RouteChildrenProps) {
   setTimeout(() => {
     const { history } = props;
     history.push({
-      pathname: `/test_result/${unicornIndex}.html`,
+      pathname: `/test_result/${unicornIndex + 1}.html`,
       search: "?" + new URLSearchParams({
         sn: btoa(encodeURIComponent(serviceName)),
         ua: btoa(encodeURIComponent(userAnswer)),
