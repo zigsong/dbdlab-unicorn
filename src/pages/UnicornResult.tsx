@@ -324,11 +324,14 @@ function UnicornResult(props: RouteChildrenProps) {
     })
   }
 
+  const urls = ["wd", "ch", "cs", "st", "tr", "in", "su", "cl", "ju"];
+  const shareUrl = `https://whonicorn.dbdlab.io/${urls[unicornIndex]}.html`
+
   const onShareFacebook = () => {
     const anyWindow: any = window;
     anyWindow.FB.ui({
       method: 'share',
-      href: `https://whonicorn.dbdlab.io/?ut=${unicornIndex}`
+      href: shareUrl
     })
   }
 
@@ -440,7 +443,7 @@ function UnicornResult(props: RouteChildrenProps) {
             <ShareButton type="button" onClick={onShareKakao}>
               <img src={kakao_icon} alt="kakao" />
             </ShareButton >
-            <CopyToClipboard text={`https://whonicorn.dbdlab.io/?ut=${unicornIndex}`} onCopy={onShareLink}>
+            <CopyToClipboard text={shareUrl} onCopy={onShareLink}>
               <ShareButton type="button">
                 <img src={link_icon} alt="link" />
               </ShareButton>
@@ -554,7 +557,7 @@ function UnicornResult(props: RouteChildrenProps) {
             <ShareButton type="button" onClick={onShareKakao}>
               <img src={kakao_icon} alt="kakao" />
             </ShareButton >
-            <CopyToClipboard text={`https://whonicorn.dbdlab.io/?ut=${unicornIndex}`} onCopy={onShareLink}>
+            <CopyToClipboard text={shareUrl} onCopy={onShareLink}>
               <ShareButton type="button">
                 <img src={link_icon} alt="link" />
               </ShareButton>
