@@ -145,6 +145,8 @@ const FooterWrapper = styled.div`
     text-align: center;
     background-color: #efefef;
     width: 100%;
+    padding-top: 29px;
+    padding-bottom: 31px;
 `
 
 function UnicornSub_2(props: RouteChildrenProps) {
