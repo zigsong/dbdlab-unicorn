@@ -21,7 +21,7 @@ function App() {
           <Route path="/service" component={UnicornEntry} />
           <Route path="/test" component={UnicornSurvey}/>
           <Route path="/test_loading" component={UnicornLoading}/>
-          <Route path="/test_result" component={UnicornResult}/>
+          <Route path="/test_result/:unicornIndex" component={UnicornResult}/>
           <Route path="/qgs" component={UnicornSub_1}/>
           <Route path="/research" component={UnicornSub_2}/>
         </Router>

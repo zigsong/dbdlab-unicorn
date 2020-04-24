@@ -4,6 +4,7 @@ import styled from "styled-components";
 import UnicornLayout from '../layouts/UnicornLayout';
 import greycorn from "../assets/img_loading_bg.png";
 import WhonicornLogo1 from "../assets/loading.gif";
+import _ from "lodash";
 
 const UnicornText = styled.span`
   &.label {
@@ -45,11 +46,24 @@ function UnicornHome(props: RouteChildrenProps) {
   const location = useLocation();
   const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
   const userAnswer = decodeURIComponent(atob(new URLSearchParams(location.search).get("ua") ?? ""));
+  
+  const motivation = userAnswer?.substr(0, 3)
+  const autonomy = userAnswer?.substr(9, 3)
+
+  const x = motivation?.split("").map(c => c.charCodeAt(0) - 'D'.charCodeAt(0));
+  const y = autonomy?.split("").map(c => c.charCodeAt(0) - 'D'.charCodeAt(0)); 
+
+  const xMean = _.mean(x);
+  const yMean = _.mean(y)
+
+  let unicornIndex = 0;
+  unicornIndex += xMean < -0.6 ? 0 : (xMean <= 0.6 ? 1 : 2)
+  unicornIndex += yMean < -0.3 ? 6 : (yMean < 1 ? 3 : 0)
 
   setTimeout(() => {
     const { history } = props;
     history.push({
-      pathname: '/test_result',
+      pathname: `/test_result/${unicornIndex}.html`,
       search: "?" + new URLSearchParams({
         sn: btoa(encodeURIComponent(serviceName)),
         ua: btoa(encodeURIComponent(userAnswer)),
