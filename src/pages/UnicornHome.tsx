@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { withRouter, RouteChildrenProps } from 'react-router-dom';
+import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from "antd"
@@ -12,6 +12,7 @@ import ImgUnicornBtnDeco2 from "../assets/unicorn-btn-deco2.svg";
 import ImgUnicornHomeBackground from "../assets/unicorn-bg.png";
 import ImgDownArrow from "../assets/unicorn-down-arrow.png";
 import ImgDbdLogo from "../assets/img_dbd_ci.png";
+import {Helmet} from "react-helmet";
 
 // Sections
 const MainSection = styled.div`
@@ -157,12 +158,31 @@ const RightArrow = styled.img`
   right: 30px;
 `;
 
+const whonicorn_thumb_1  = "thumbnail/img_th_kf_wizard.png"
+const whonicorn_thumb_2  = "thumbnail/img_th_kf_chameleon.png"
+const whonicorn_thumb_3  = "thumbnail/img_th_kf_choongsin.png"
+const whonicorn_thumb_4  = "thumbnail/img_th_kf_star.png"
+const whonicorn_thumb_5  = "thumbnail/img_th_kf_transparent.png"
+const whonicorn_thumb_6  = "thumbnail/img_th_kf_inventor.png"
+const whonicorn_thumb_7  = "thumbnail/img_th_kf_surfer.png"
+const whonicorn_thumb_8  = "thumbnail/img_th_kf_clay.png"
+const whonicorn_thumb_9  = "thumbnail/img_th_kf_judge.png"
+
+
+const unicornThumbs = [
+  whonicorn_thumb_1, whonicorn_thumb_2, whonicorn_thumb_3,
+  whonicorn_thumb_4, whonicorn_thumb_5, whonicorn_thumb_6,
+  whonicorn_thumb_7, whonicorn_thumb_8, whonicorn_thumb_9
+]
 
 function UnicornHome(props: RouteChildrenProps) {
   const onStart = () => {
     const { history } = props;
     history.push("/service");
   }
+  
+  const location = useLocation();
+  const unicornIndex = parseInt(new URLSearchParams(location.search).get("ut") ?? "");
 
   useEffect(() => {
       window.scrollTo(0, 0)
@@ -170,6 +190,10 @@ function UnicornHome(props: RouteChildrenProps) {
 
   return (
     <UnicornLayout>
+      {unicornIndex && !isNaN(unicornIndex) && 0 <= unicornIndex && unicornIndex <= 8 && <Helmet>
+        <meta name="og:image" content={`https://whonicorn.dbdlab.io/${unicornThumbs[unicornIndex]}`} />
+      </Helmet>}
+
       <MainSection>
         <UnicornLogo src={ImgUnicornLogo} alt="unicornLogo" />
         <UnicornTitle src={ImgUnicornTitle} alt="unicornTitle" />

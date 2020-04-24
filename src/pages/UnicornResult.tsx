@@ -51,6 +51,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import UnicornLayout from '../layouts/UnicornLayout';
 import CopyToClipboard from "react-copy-to-clipboard";
 import _ from "lodash";
+import {Helmet} from "react-helmet";
 
 const Context = React.createContext({ name: 'Default' });
 
@@ -229,30 +230,30 @@ const unicornImgs = [
 ];
 
 
-const whonicorn_square_1 = "thumbnail/img_th_kf_wizard.png"
-const whonicorn_square_2 = "thumbnail/img_th_kf_-chameleon.png"
-const whonicorn_square_3 = "thumbnail/img_th_kf_choongsin.png"
-const whonicorn_square_4 = "thumbnail/img_th_kf_star.png"
-const whonicorn_square_5 = "thumbnail/img_th_kf_transparent.png"
-const whonicorn_square_6 = "thumbnail/img_th_kf_inventor.png"
-const whonicorn_square_7 = "thumbnail/img_th_kf_surfer.png"
-const whonicorn_square_8 = "thumbnail/img_th_kf_clay.png"
-const whonicorn_square_9 = "thumbnail/img_th_kf_judge.png"
-const whonicorn_thumb_1  = "thumbnail/img_th_s_wizard.png"
-const whonicorn_thumb_2  = "thumbnail/img_th_s_chameleon.png"
-const whonicorn_thumb_3  = "thumbnail/img_th_s_choongsin.png"
-const whonicorn_thumb_4  = "thumbnail/img_th_s_star.png"
-const whonicorn_thumb_5  = "thumbnail/img_th_s_transparent.png"
-const whonicorn_thumb_6  = "thumbnail/img_th_s_inventor.png"
-const whonicorn_thumb_7  = "thumbnail/img_th_s_surfer.png"
-const whonicorn_thumb_8  = "thumbnail/img_th_s_clay.png"
-const whonicorn_thumb_9  = "thumbnail/img_th_s_judge.png"
+const whonicorn_square_1 = "thumbnail/img_th_s_wizard.png"
+const whonicorn_square_2 = "thumbnail/img_th_s_chameleon.png"
+const whonicorn_square_3 = "thumbnail/img_th_s_choongsin.png"
+const whonicorn_square_4 = "thumbnail/img_th_s_star.png"
+const whonicorn_square_5 = "thumbnail/img_th_s_transparent.png"
+const whonicorn_square_6 = "thumbnail/img_th_s_inventor.png"
+const whonicorn_square_7 = "thumbnail/img_th_s_surfer.png"
+const whonicorn_square_8 = "thumbnail/img_th_s_clay.png"
+const whonicorn_square_9 = "thumbnail/img_th_s_judge.png"
+
+const whonicorn_thumb_1  = "thumbnail/img_th_kf_wizard.png"
+const whonicorn_thumb_2  = "thumbnail/img_th_kf_chameleon.png"
+const whonicorn_thumb_3  = "thumbnail/img_th_kf_choongsin.png"
+const whonicorn_thumb_4  = "thumbnail/img_th_kf_star.png"
+const whonicorn_thumb_5  = "thumbnail/img_th_kf_transparent.png"
+const whonicorn_thumb_6  = "thumbnail/img_th_kf_inventor.png"
+const whonicorn_thumb_7  = "thumbnail/img_th_kf_surfer.png"
+const whonicorn_thumb_8  = "thumbnail/img_th_kf_clay.png"
+const whonicorn_thumb_9  = "thumbnail/img_th_kf_judge.png"
 
 const unicornSquareImgs = [
   whonicorn_square_1, whonicorn_square_2, whonicorn_square_3,
   whonicorn_square_4, whonicorn_square_5, whonicorn_square_6,
   whonicorn_square_7, whonicorn_square_8, whonicorn_square_9
-
 ]
 
 const unicornThumbs = [
@@ -328,7 +329,7 @@ function UnicornResult(props: RouteChildrenProps) {
     const anyWindow: any = window;
     anyWindow.FB.ui({
       method: 'share',
-      href: 'https://whonicorn.dbdlab.io'
+      href: `https://whonicorn.dbdlab.io/?ut=${unicornIndex}`
     })
   }
 
@@ -414,6 +415,12 @@ function UnicornResult(props: RouteChildrenProps) {
   return (
     <Context.Provider value={{ name: 'Whonicorn' }}>
       {contextHolder}
+      <Helmet>
+        <meta name="og:title" content={unicorn.title}/>
+        <meta name="og:description" content={unicorn.caption1}/>
+        <meta name="og:image" content={`https://whonicorn.dbdlab.io/${unicornThumbs[unicornIndex]}`} />
+      </Helmet>
+
       <UnicornLayout>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ width: "100%", position: "relative" }}>
@@ -439,7 +446,7 @@ function UnicornResult(props: RouteChildrenProps) {
             <ShareButton type="button" onClick={onShareKakao}>
               <img src={kakao_icon} alt="kakao" />
             </ShareButton >
-            <CopyToClipboard text={"https://whonicorn.dbdlab.io"} onCopy={onShareLink}>
+            <CopyToClipboard text={`https://whonicorn.dbdlab.io/?ut=${unicornIndex}`} onCopy={onShareLink}>
               <ShareButton type="button">
                 <img src={link_icon} alt="link" />
               </ShareButton>
@@ -553,9 +560,11 @@ function UnicornResult(props: RouteChildrenProps) {
             <ShareButton type="button" onClick={onShareKakao}>
               <img src={kakao_icon} alt="kakao" />
             </ShareButton >
-            <ShareButton type="button" onClick={onShareLink}>
-              <img src={link_icon} alt="link" />
-            </ShareButton>
+            <CopyToClipboard text={`https://whonicorn.dbdlab.io/?ut=${unicornIndex}`} onCopy={onShareLink}>
+              <ShareButton type="button">
+                <img src={link_icon} alt="link" />
+              </ShareButton>
+            </CopyToClipboard>
           </ShareMenu>
 
           <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '15px', marginBottom: '2px', marginTop: '40px' }}>후니콘 결과는 어떠셨나요?</UnicornTextBold>
