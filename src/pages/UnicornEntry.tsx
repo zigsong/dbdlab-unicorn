@@ -36,7 +36,7 @@ const UnicornInput = styled(Input)`
   width: 270px;
   height: 53px;
   text-align: center;
-  font-size: 15px;
+  font-size: 16px;
   font-family: 'NanumSquare Regular';
   border: solid 1px #c7c8f3;
   margin-bottom: 25px;
