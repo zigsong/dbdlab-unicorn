@@ -82,7 +82,9 @@ const UnicornStartBtn = styled(Button)`
   font-size: 16px;
   line-height: 22px;
   background-color: #7986cb;
+  border-color: #7986cb;
   color: #ffffff;
+  border-radius: 0px;
 
   &:hover {
     border-color: #7986cb;

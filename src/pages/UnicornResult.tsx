@@ -100,6 +100,7 @@ const FeedbackIcon = styled.img`
   height: 46px; 
   margin-bottom: 5px;
   z-index: 1;
+  cursor: pointer;
 `
 const UnicornButton = styled(Button)`
   width: 270px;
@@ -107,9 +108,11 @@ const UnicornButton = styled(Button)`
   display: inline-block;
   position: relative;
   background-color: #7986cb;
+  border-color: #7986cb;
   font-size: 16px;
   font-family: 'NanumSquare Bold';
   color: #ffffff;
+  border-radius: 0px;
   
   &:hover {
     border-color: #7986cb;
@@ -147,6 +150,7 @@ const ShareButton = styled.button`
   background:none;
   width: 50px;
   height: 50px;
+  cursor: pointer;
 `
 
 const getPointColor = (point: number) => {
@@ -469,7 +473,7 @@ function UnicornResult(props: RouteChildrenProps) {
 
         <UnicornTextBold style={{ color: '#4a4a4a', fontSize: '15px', marginBottom: '2px', marginTop: '40px' }}>후니콘 결과는 어떠셨나요?</UnicornTextBold>
         <UnicornTextRegular style={{ color: '#9b9b9b', fontSize: '10px', marginBottom: '22px' }}>중복 투표 가능해요 :)</UnicornTextRegular>
-        <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '49px', width: '282px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '49px', width: '300px' }}>
           <FeedbackWrapper>
             <UnicornToast color={'#ba68c8'} active={feedbackOption[0]}>힝</UnicornToast>
             <FeedbackIcon src={feedbackOption[0] ? feedback1_on : feedback1_off } onClick={() => selectFeedback(0)}></FeedbackIcon>

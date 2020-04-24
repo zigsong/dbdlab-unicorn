@@ -55,8 +55,10 @@ const UnicornButton = styled(Button)`
   display: inline-block;
   position: relative;
   background-color: #7986cb;
+  border-color: #7986cb;
   font-family: 'NanumSquare Bold';
   color: #ffffff;
+  border-radius: 0px;
   
   &:hover {
     border-color: #7986cb;

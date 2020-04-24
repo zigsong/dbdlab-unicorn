@@ -26,10 +26,10 @@ const StyledToast = styled.div`
         z-index: 2;
 
         -webkit-transition-property: width height opacity background-color font-size left top transform -webkit-transform color;
-        -webkit-transition-duration:0.1s;
+        -webkit-transition-duration:0.2s;
         -webkit-transition-timing-function: ease;
         transition-property: width height opacity background-color font-size left top transform -webkit-transform color;
-        transition-duration:0.1s;
+        transition-duration:0.2s;
         transition-timing-function: ease;
     }
 
@@ -42,10 +42,10 @@ const StyledToast = styled.div`
 
         -webkit-transition-property: width height opacity background-color font-size left top transform -webkit-transform color;
         -webkit-transition-duration:0.4s;
-        -webkit-transition-timing-function: ease-out;
+        -webkit-transition-timing-function: ease;
         transition-property: width height opacity background-color font-size left top transform -webkit-transformv color;
         transition-duration:0.4s;
-        transition-timing-function: ease-out;
+        transition-timing-function: ease;
     }
 `
 
@@ -79,7 +79,7 @@ function UnicornToast(props: UnicornToastProps) {
             
         setTimeout(() => {
             setDelay(2);
-        }, 500);
+        }, 700);
     }, [delay, prevActive, props.active])
 
     return (
