@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import styled from "styled-components";
-import { Button, Input } from "antd"
 import UnicornLayout from '../layouts/UnicornLayout';
 import greycorn from "../assets/img_loading_bg.png";
 import WhonicornLogo1 from "../assets/loading.gif";

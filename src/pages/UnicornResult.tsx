@@ -15,9 +15,7 @@ import UnicornTransparent from "../texts/UnicornTransparent";
 import resultBg from "../assets/img_result_bg.png";
 import facebook_icon from "../assets/group-9.svg";
 import kakao_icon from "../assets/group-7.svg";
-import slack_icon from "../assets/group-6.svg";
 import link_icon from "../assets/group-5.svg";
-import dbdLogo from "../assets/img_dbd_ci.png";
 
 import whonicorn_1 from "../assets/img_whonicorn1.png";
 import whonicorn_2 from "../assets/img_whonicorn2.png";
@@ -101,6 +99,7 @@ const FeedbackIcon = styled.img`
   width: 46px;
   height: 46px; 
   margin-bottom: 5px;
+  z-index: 1;
 `
 const UnicornButton = styled(Button)`
   width: 270px;
@@ -234,7 +233,6 @@ const statHeaders = [
 ]
 
 function UnicornResult(props: RouteChildrenProps) {
-  const [isLoaded, setIsLoaded] = useState(true);
   const [feedbackOption, setFeedbackOption] = useState([false, false, false, false, false]);
 
   const location = useLocation();
@@ -256,10 +254,6 @@ function UnicornResult(props: RouteChildrenProps) {
 
   const unicorn = unicorns[unicornIndex];
   const unicornImg = unicornImgs[unicornIndex];
-  const onStart = () => {
-    const { history } = props;
-    history.push("/entry");
-  }
 
   const goEntry = () => {
     const { history } = props;
@@ -293,10 +287,6 @@ function UnicornResult(props: RouteChildrenProps) {
   }
 
   const onShareKakao = () => {
-
-  }
-
-  const onShareSlack = () => {
 
   }
 
@@ -439,7 +429,7 @@ function UnicornResult(props: RouteChildrenProps) {
         <DottedLine style={{ marginBottom: '15px' }}></DottedLine>
         <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '24px' }}>
           {unicorn.checkpoints.map((checkpoint, i) => (
-            <div style={{
+            <div key={`check_${i}`} style={{
               width: '81px',
               height: '81px',
               padding: '8px',

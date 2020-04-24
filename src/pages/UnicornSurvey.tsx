@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import UnicornLayout from "../layouts/UnicornLayout";
-import { Button, Input } from "antd"
-import { UnicornEmptyRow,  UnicornRadio } from "../components";
+import { Button } from "antd"
+import { UnicornRadio } from "../components";
 import styled from "styled-components";
 import { Progress } from 'antd';
 import WhonicornLogo from "../assets/img_loading2.png";
