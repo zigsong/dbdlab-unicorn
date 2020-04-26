@@ -4,6 +4,7 @@ echo "Deploy To S3 Bucket dbd-unicorn"
 npm run build
 
 mkdir ./build/test_result
+mkdir ./build/home
 
 cp ./build/index.html ./build/test_result/1.html
 cp ./build/index.html ./build/test_result/2.html
