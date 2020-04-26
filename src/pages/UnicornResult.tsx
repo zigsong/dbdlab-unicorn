@@ -257,7 +257,7 @@ function UnicornResult(props: RouteChildrenProps) {
   const location = useLocation();
   const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
   const userAnswer = decodeURIComponent(atob(new URLSearchParams(location.search).get("ua") ?? ""));
-  // const uniqueID = new URLSearchParams(location.search).get("uq") ?? "debug";
+  const uniqueID = new URLSearchParams(location.search).get("uq") ?? "debug";
 
   const motivation = userAnswer?.substr(0, 3)
   const autonomy = userAnswer?.substr(9, 3)
@@ -428,6 +428,25 @@ function UnicornResult(props: RouteChildrenProps) {
     const newFeedBackOption = [...feedbackOption];
     newFeedBackOption[choice] = !newFeedBackOption[choice];
     setFeedbackOption(newFeedBackOption);
+
+    const feedbacks = ["hard", "agree", "good", "fun", "notfit"]
+
+    fetch("https://apfudr7t28.execute-api.ap-northeast-2.amazonaws.com/prod/whonicorn", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({
+          "type": "answer",
+          "sn": (new URLSearchParams(location.search).get("sn") ?? ""),
+          "ua": (new URLSearchParams(location.search).get("ua") ?? ""),
+          "uq": uniqueID,
+          "ui": unicornIndex,
+          "reaction_type": feedbacks[choice],
+          "positive": newFeedBackOption[choice]
+        })
+    }).then(() => {})
   }
   
   return (

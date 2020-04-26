@@ -59,6 +59,23 @@ function UnicornHome(props: RouteChildrenProps) {
   let unicornIndex = 0;
   unicornIndex += xMean < -0.6 ? 0 : (xMean <= 0.6 ? 1 : 2)
   unicornIndex += yMean < -0.3 ? 6 : (yMean < 1 ? 3 : 0)
+  
+  const uq = generateUID()
+
+  fetch("https://apfudr7t28.execute-api.ap-northeast-2.amazonaws.com/prod/whonicorn", {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    body: JSON.stringify({
+      "type": "answer",
+      "sn": new URLSearchParams(location.search).get("sn") ?? "",
+      "ua": new URLSearchParams(location.search).get("ua") ?? "",
+      "uq": uq,
+      "ui": unicornIndex,
+    })
+  }).then(() => {})
 
   setTimeout(() => {
     const { history } = props;
@@ -67,7 +84,7 @@ function UnicornHome(props: RouteChildrenProps) {
       search: "?" + new URLSearchParams({
         sn: btoa(encodeURIComponent(serviceName)),
         ua: btoa(encodeURIComponent(userAnswer)),
-        uq: generateUID()
+        uq
       }).toString()
     })
   }, 4000)
