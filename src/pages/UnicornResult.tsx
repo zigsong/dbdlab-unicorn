@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { Button, notification, Divider } from 'antd';
+import { Button, notification } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 
 import UnicornMagician from "../texts/UnicornMagician";
@@ -47,7 +47,6 @@ import img_check from "../assets/path-2.svg";
 import 'react-toastify/dist/ReactToastify.css';
 
 import UnicornToast from "../components/UnicornToast";
-import { ToastContainer, toast } from 'react-toastify';
 import UnicornLayout from '../layouts/UnicornLayout';
 import CopyToClipboard from "react-copy-to-clipboard";
 import _ from "lodash";
@@ -81,11 +80,7 @@ const WhonicornImg = styled.img`
   height: 245px;
   margin-bottom: 16px;
 `
-const UnicornFont = styled.text`
-  font-family: 'fromdamiM';
-  display: inline-block;
-  position: relative;
-`
+
 const ShareMenu = styled.div`
   background-color: #f8f8f8;
   align-items: center;
@@ -239,26 +234,10 @@ const whonicorn_square_7 = "thumbnail/img_th_s_surfer.png"
 const whonicorn_square_8 = "thumbnail/img_th_s_clay.png"
 const whonicorn_square_9 = "thumbnail/img_th_s_judge.png"
 
-const whonicorn_thumb_1  = "thumbnail/img_th_kf_wizard.png"
-const whonicorn_thumb_2  = "thumbnail/img_th_kf_chameleon.png"
-const whonicorn_thumb_3  = "thumbnail/img_th_kf_choongsin.png"
-const whonicorn_thumb_4  = "thumbnail/img_th_kf_star.png"
-const whonicorn_thumb_5  = "thumbnail/img_th_kf_transparent.png"
-const whonicorn_thumb_6  = "thumbnail/img_th_kf_inventor.png"
-const whonicorn_thumb_7  = "thumbnail/img_th_kf_surfer.png"
-const whonicorn_thumb_8  = "thumbnail/img_th_kf_clay.png"
-const whonicorn_thumb_9  = "thumbnail/img_th_kf_judge.png"
-
 const unicornSquareImgs = [
   whonicorn_square_1, whonicorn_square_2, whonicorn_square_3,
   whonicorn_square_4, whonicorn_square_5, whonicorn_square_6,
   whonicorn_square_7, whonicorn_square_8, whonicorn_square_9
-]
-
-const unicornThumbs = [
-  whonicorn_thumb_1, whonicorn_thumb_2, whonicorn_thumb_3,
-  whonicorn_thumb_4, whonicorn_thumb_5, whonicorn_thumb_6,
-  whonicorn_thumb_7, whonicorn_thumb_8, whonicorn_thumb_9
 ]
 
 const statHeaders = [
@@ -278,7 +257,7 @@ function UnicornResult(props: RouteChildrenProps) {
   const location = useLocation();
   const serviceName = decodeURIComponent(atob(new URLSearchParams(location.search).get("sn") ?? ""));
   const userAnswer = decodeURIComponent(atob(new URLSearchParams(location.search).get("ua") ?? ""));
-  const uniqueID = new URLSearchParams(location.search).get("uq") ?? "debug";
+  // const uniqueID = new URLSearchParams(location.search).get("uq") ?? "debug";
 
   const motivation = userAnswer?.substr(0, 3)
   const autonomy = userAnswer?.substr(9, 3)
@@ -295,6 +274,15 @@ function UnicornResult(props: RouteChildrenProps) {
 
   const unicorn = unicorns[unicornIndex];
   const unicornImg = unicornImgs[unicornIndex];
+
+  const anyWindow: any = window;
+  if (anyWindow.gtag) {
+    anyWindow.gtag("event", "test_show_result", {
+      event_category: "access",
+      event_label: serviceName ? serviceName.trim() : "후니콘",
+      value: unicornIndex
+    });
+  }
 
   const goEntry = () => {
     const { history } = props;
@@ -329,14 +317,34 @@ function UnicornResult(props: RouteChildrenProps) {
 
   const onShareFacebook = () => {
     const anyWindow: any = window;
-    anyWindow.FB.ui({
-      method: 'share',
-      href: shareUrl
-    })
+
+    if (anyWindow.gtag) {
+      anyWindow.gtag("event", "share_facebook", {
+        event_category: "share",
+        event_label: serviceName ? serviceName.trim() : "후니콘",
+        value: unicornIndex
+      });
+    }
+
+    if (anyWindow.FB) {
+      anyWindow.FB.ui({
+        method: 'share',
+        href: shareUrl
+      })
+    }
   }
 
   const onShareKakao = () => {
     const anyWindow: any = window;
+
+    if (anyWindow.gtag) {
+      anyWindow.gtag("event", "share_kakao", {
+        event_category: "share",
+        event_label: serviceName ? serviceName.trim() : "후니콘",
+        value: unicornIndex
+      });
+    }
+
     if (!anyWindow.Kakao || !anyWindow.Kakao.isInitialized()) return;
       anyWindow.Kakao.Link.sendDefault({
         objectType:"feed",
@@ -361,9 +369,17 @@ function UnicornResult(props: RouteChildrenProps) {
     });
   }
 
-  const [api, contextHolder] = notification.useNotification();
+  const [,contextHolder] = notification.useNotification();
 
   const onShareLink = () => {
+    if (anyWindow.gtag) {
+      anyWindow.gtag("event", "share_link", {
+        event_category: "share",
+        event_label: serviceName ? serviceName.trim() : "후니콘",
+        value: unicornIndex
+      });
+    }
+
     notification.info({
       message: `URL이 복사되었습니다.`,
       description: <Context.Consumer>{({ name }) => `원하는 곳에 URL을 공유하세요.`}</Context.Consumer>,

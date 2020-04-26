@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import UnicornLayout from '../layouts/UnicornLayout';
@@ -222,7 +222,7 @@ function UnicornSub_2(props: RouteChildrenProps) {
         <UnicornLayout>
              <TopImgWrapper>
                 <div style={{ position: "relative" }}>
-                    <img src={sub_top} alt="top-image" width="100%" height="auto" style={{ position: "relative" }}/>
+                    <img src={sub_top} alt="sub2-top" width="100%" height="auto" style={{ position: "relative" }}/>
                     <div style={{ position: "absolute", border: "solid 1px #ffffff", width: "70px", height: "22px", top: "18px", left: "18px", zIndex: 10}}
                          onClick={goBack}>
                         <UnicornTextRegular className="back-button">뒤로가기</UnicornTextRegular>
@@ -256,7 +256,7 @@ function UnicornSub_2(props: RouteChildrenProps) {
             <div style={{ marginLeft: "17px", marginRight: "17px" }}>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <div style={{ flex: 1}}></div>
-                    <img src={eyes_img} width="72px" height="66px" style={{ display: "block", marginRight: "-18px", marginBottom: "15px" }} />
+                    <img src={eyes_img} alt="eyes" width="72px" height="66px" style={{ display: "block", marginRight: "-18px", marginBottom: "15px" }} />
                     <YellowBubble>
                         <UnicornTextBold style={{ fontSize: "14px", color: "#3b3b3b" }}>Q.무엇을 할 수 있나요?</UnicornTextBold>
                     </YellowBubble>
@@ -355,7 +355,7 @@ function UnicornSub_2(props: RouteChildrenProps) {
                     <strong>contact@dbdlab.io</strong>로 문의 주씨오.<br />
                     <span style={{ fontFamily: 'NanumSquare Extra Regular', color: "#b7b7b7", textDecoration: "line-through" }}>(안 그럼 기계는 죽소.)</span>
                 </UnicornTextRegular>
-                <img src={goodbye} width="130px" height="auto" style={{ marginBottom: "43px"}} />
+                <img src={goodbye} alt="goodbye" width="130px" height="auto" style={{ marginBottom: "43px"}} />
             </div>
 
             <FooterWrapper>

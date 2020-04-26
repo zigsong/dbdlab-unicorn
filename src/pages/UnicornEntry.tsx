@@ -96,6 +96,15 @@ function UnicornHome(props: RouteChildrenProps) {
   
   const onNext = () => {
     const { history } = props;
+    const anyWindow: any = window;
+
+    if (anyWindow.gtag) {
+      anyWindow.gtag("event", "test_start", {
+        event_category: "access",
+        event_label: serviceName ? serviceName.trim() : "후니콘"
+      });
+    }
+
     history.push({
       pathname: '/test',
       search: "?" + new URLSearchParams({

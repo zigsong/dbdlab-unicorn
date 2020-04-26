@@ -43,7 +43,7 @@ const StyledDiv = styled.div`
 //   }     
 // `
 
-const Caption = styled.p`
+const Caption = styled.div`
   max-width: 40%;
   font-size: 10px;
   margin-bottom: 0;

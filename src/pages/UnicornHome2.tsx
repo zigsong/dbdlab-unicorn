@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { withRouter, RouteChildrenProps, useLocation } from 'react-router-dom';
+import { withRouter, RouteChildrenProps } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from "antd"
@@ -157,23 +157,6 @@ const RightArrow = styled.img`
   right: 30px;
 `;
 
-const whonicorn_thumb_1  = "thumbnail/img_th_kf_wizard.png"
-const whonicorn_thumb_2  = "thumbnail/img_th_kf_chameleon.png"
-const whonicorn_thumb_3  = "thumbnail/img_th_kf_choongsin.png"
-const whonicorn_thumb_4  = "thumbnail/img_th_kf_star.png"
-const whonicorn_thumb_5  = "thumbnail/img_th_kf_transparent.png"
-const whonicorn_thumb_6  = "thumbnail/img_th_kf_inventor.png"
-const whonicorn_thumb_7  = "thumbnail/img_th_kf_surfer.png"
-const whonicorn_thumb_8  = "thumbnail/img_th_kf_clay.png"
-const whonicorn_thumb_9  = "thumbnail/img_th_kf_judge.png"
-
-
-const unicornThumbs = [
-  whonicorn_thumb_1, whonicorn_thumb_2, whonicorn_thumb_3,
-  whonicorn_thumb_4, whonicorn_thumb_5, whonicorn_thumb_6,
-  whonicorn_thumb_7, whonicorn_thumb_8, whonicorn_thumb_9
-]
-
 function UnicornHome(props: RouteChildrenProps) {
   const onStart = () => {
     const { history } = props;
@@ -181,9 +164,6 @@ function UnicornHome(props: RouteChildrenProps) {
   }
   const { history } = props;
   history.push("/");
-  
-  const location = useLocation();
-  const unicornIndex = parseInt(new URLSearchParams(location.search).get("ut") ?? "");
 
   useEffect(() => {
       window.scrollTo(0, 0)
